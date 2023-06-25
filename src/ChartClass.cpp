@@ -1,4 +1,5 @@
 #include <wx/dc.h>
+
 #include "../include/ChartClass.h"
 
 
@@ -15,3 +16,4 @@ Chart::Chart(GUIMyFrame1* wnd) {
 	surface = false;
 	xSurface = ySurface = zSurface = 0;
 }
+
