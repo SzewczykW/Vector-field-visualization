@@ -1,5 +1,6 @@
 #include <wx/dc.h>
-#include "ChartClass.h"
+#include "../include/ChartClass.h"
+
 
 Chart::Chart(GUIMyFrame1* wnd) {
 	MainWnd = wnd;

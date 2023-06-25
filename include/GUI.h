@@ -15,11 +15,11 @@
 #include <wx/colour.h>
 #include <wx/settings.h>
 #include <wx/string.h>
+#include <wx/sizer.h>
 #include <wx/stattext.h>
 #include <wx/choice.h>
-#include <wx/scrolbar.h>
-#include <wx/sizer.h>
 #include <wx/textctrl.h>
+#include <wx/scrolbar.h>
 #include <wx/checkbox.h>
 #include <wx/button.h>
 #include <wx/bitmap.h>
@@ -40,63 +40,103 @@ class MyFrame1 : public wxFrame
 	protected:
 		wxPanel* MainPanel;
 		wxStaticText* m_staticText1;
-		wxChoice* function;
 		wxStaticText* m_staticText2;
-		wxScrollBar* a_scrollBar;
+		wxChoice* XFun;
 		wxStaticText* m_staticText3;
-		wxScrollBar* b_scrollBar;
-		wxStaticText* m_staticText12;
-		wxStaticText* m_staticText132;
-		wxTextCtrl* x_start;
-		wxStaticText* m_staticText142;
-		wxTextCtrl* x_stop;
-		wxStaticText* m_staticText131;
-		wxTextCtrl* y_start;
-		wxStaticText* m_staticText141;
-		wxTextCtrl* y_stop;
-		wxStaticText* m_staticText13;
-		wxTextCtrl* z_start;
-		wxStaticText* m_staticText14;
-		wxTextCtrl* z_stop;
-		wxStaticText* m_staticText15;
-		wxTextCtrl* divide;
+		wxTextCtrl* AParam;
 		wxStaticText* m_staticText4;
-		wxScrollBar* arrow_length;
-		wxCheckBox* auto_arrows;
+		wxChoice* YFun;
+		wxStaticText* m_staticText5;
+		wxTextCtrl* BParam;
 		wxStaticText* m_staticText6;
-		wxScrollBar* x_scrollBar;
-		wxStaticText* m_staticText61;
-		wxScrollBar* y_scrollBar;
-		wxStaticText* m_staticText62;
-		wxScrollBar* z_scrollBar;
-		wxCheckBox* addSurface;
-		wxButton* save;
+		wxChoice* ZFun;
+		wxStaticText* m_staticText7;
+		wxTextCtrl* CParam;
+		wxStaticText* m_staticText26;
+		wxStaticText* m_staticText27;
+		wxStaticText* m_staticText33;
+		wxScrollBar* XScale;
+		wxStaticText* m_staticText28;
+		wxStaticText* xScale_staticText;
+		wxStaticText* m_staticText29;
+		wxStaticText* m_staticText34;
+		wxScrollBar* YScale;
+		wxStaticText* m_staticText30;
+		wxStaticText* yScale_staticText;
+		wxStaticText* m_staticText31;
+		wxStaticText* m_staticText35;
+		wxScrollBar* ZScale;
+		wxStaticText* m_staticText32;
+		wxStaticText* zScale_staticText;
+		wxStaticText* m_staticText8;
+		wxStaticText* m_staticText9;
+		wxTextCtrl* XMin;
+		wxStaticText* m_staticText10;
+		wxTextCtrl* XMax;
+		wxStaticText* m_staticText11;
+		wxTextCtrl* YMin;
+		wxStaticText* m_staticText12;
+		wxTextCtrl* YMax;
+		wxStaticText* m_staticText13;
+		wxTextCtrl* ZMin;
+		wxStaticText* m_staticText14;
+		wxTextCtrl* ZMax;
+		wxStaticText* m_staticText15;
+		wxScrollBar* ArrowScale;
+		wxStaticText* arrow_staticText;
+		wxCheckBox* AutoLen;
+		wxStaticText* m_staticText17;
+		wxStaticText* m_staticText18;
+		wxScrollBar* XRot;
+		wxStaticText* xRot_staticText;
+		wxStaticText* m_staticText19;
+		wxScrollBar* YRot;
+		wxStaticText* yRot_staticText;
+		wxStaticText* m_staticText20;
+		wxScrollBar* ZRot;
+		wxStaticText* zRot_staticText;
+		wxCheckBox* AddSurface;
+		wxStaticText* m_staticText22;
+		wxTextCtrl* XSurface;
+		wxStaticText* m_staticText23;
+		wxTextCtrl* YSurface;
+		wxStaticText* m_staticText24;
+		wxTextCtrl* ZSurface;
+		wxButton* SaveButton;
 
 		// Virtual event handlers, override them in your derived class
 		virtual void MainPanelOnSize( wxSizeEvent& event ) { event.Skip(); }
-		virtual void MainPanelOnUpdateUI( wxUpdateUIEvent& event ) { event.Skip(); }
-		virtual void functionOnChoice( wxCommandEvent& event ) { event.Skip(); }
-		virtual void a_scrollBarOnScroll( wxScrollEvent& event ) { event.Skip(); }
-		virtual void b_scrollBarOnScroll( wxScrollEvent& event ) { event.Skip(); }
-		virtual void x_startOnText( wxCommandEvent& event ) { event.Skip(); }
-		virtual void x_stopOnText( wxCommandEvent& event ) { event.Skip(); }
-		virtual void y_startOnText( wxCommandEvent& event ) { event.Skip(); }
-		virtual void y_stopOnText( wxCommandEvent& event ) { event.Skip(); }
-		virtual void z_startOnText( wxCommandEvent& event ) { event.Skip(); }
-		virtual void z_stopOnText( wxCommandEvent& event ) { event.Skip(); }
-		virtual void divideOnText( wxCommandEvent& event ) { event.Skip(); }
-		virtual void arrow_lengthOnScroll( wxScrollEvent& event ) { event.Skip(); }
-		virtual void auto_arrowsOnCheckBox( wxCommandEvent& event ) { event.Skip(); }
-		virtual void x_scrollBarOnScroll( wxScrollEvent& event ) { event.Skip(); }
-		virtual void y_scrollBarOnScroll( wxScrollEvent& event ) { event.Skip(); }
-		virtual void z_scrollBarOnScroll( wxScrollEvent& event ) { event.Skip(); }
-		virtual void addSurfaceOnCheckBox( wxCommandEvent& event ) { event.Skip(); }
-		virtual void saveOnButtonClick( wxCommandEvent& event ) { event.Skip(); }
+		virtual void MainPanelRepaint( wxUpdateUIEvent& event ) { event.Skip(); }
+		virtual void XFunOnChoice( wxCommandEvent& event ) { event.Skip(); }
+		virtual void AParamOnText( wxCommandEvent& event ) { event.Skip(); }
+		virtual void YFunOnChoice( wxCommandEvent& event ) { event.Skip(); }
+		virtual void BParamOnText( wxCommandEvent& event ) { event.Skip(); }
+		virtual void ZFunOnChoice( wxCommandEvent& event ) { event.Skip(); }
+		virtual void CParamOnText( wxCommandEvent& event ) { event.Skip(); }
+		virtual void XScaleOnScroll( wxScrollEvent& event ) { event.Skip(); }
+		virtual void YScaleOnScroll( wxScrollEvent& event ) { event.Skip(); }
+		virtual void ZScaleOnScroll( wxScrollEvent& event ) { event.Skip(); }
+		virtual void XMinOnText( wxCommandEvent& event ) { event.Skip(); }
+		virtual void XMaxOnText( wxCommandEvent& event ) { event.Skip(); }
+		virtual void YMinOnText( wxCommandEvent& event ) { event.Skip(); }
+		virtual void YMaxOnText( wxCommandEvent& event ) { event.Skip(); }
+		virtual void ZMinOnText( wxCommandEvent& event ) { event.Skip(); }
+		virtual void ZMaxOnText( wxCommandEvent& event ) { event.Skip(); }
+		virtual void ArrowBarOnScroll( wxScrollEvent& event ) { event.Skip(); }
+		virtual void AutoLenOnCheckBox( wxCommandEvent& event ) { event.Skip(); }
+		virtual void XRotOnScroll( wxScrollEvent& event ) { event.Skip(); }
+		virtual void YRotOnScroll( wxScrollEvent& event ) { event.Skip(); }
+		virtual void ZRotOnScroll( wxScrollEvent& event ) { event.Skip(); }
+		virtual void AddSurfaceOnCheckBox( wxCommandEvent& event ) { event.Skip(); }
+		virtual void XSurfaceOnText( wxCommandEvent& event ) { event.Skip(); }
+		virtual void YSurfaceOnText( wxCommandEvent& event ) { event.Skip(); }
+		virtual void ZSurfaceOnText( wxCommandEvent& event ) { event.Skip(); }
+		virtual void SaveButtonOnButtonClick( wxCommandEvent& event ) { event.Skip(); }
 
 
 	public:
 
-		MyFrame1( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Wizualizacja Pola Wektorowego"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 629,517 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
+		MyFrame1( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Vector Field Visualisation"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 1000,800 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
 
 		~MyFrame1();
 
