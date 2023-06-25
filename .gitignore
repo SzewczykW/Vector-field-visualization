@@ -33,3 +33,12 @@
 
 # WxWidgets files
 *.fbp
+
+# Visual Studio files
+*.sln
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+./.vs
+./x64
+
