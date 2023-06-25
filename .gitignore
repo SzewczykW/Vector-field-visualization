@@ -29,21 +29,14 @@
 # Executables
 *.exe
 *.out
-*.app
 
-*.lock
-*.db
-*.opendb
-*.db-wal
-*.db-shm
-*.user
-*.tlog
-*.recipe
-*.pdb
-*.ilk
-*.log
-*.idb
-*.vsidx
-*.suo
-*.txt
+# WxWidgets files
+*.fbp
 
+# Visual Studio files
+*.sln
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+./.vs
+./x64
