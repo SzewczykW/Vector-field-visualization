@@ -38,5 +38,5 @@
 *.vcxproj
 *.vcxproj.filters
 *.vcxproj.user
-./.vs
-./x64
+.vs/*
+x64/*

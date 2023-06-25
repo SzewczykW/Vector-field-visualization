@@ -1,5 +1,5 @@
 #include <wx/wxprec.h>
-#include "GUIMyFrame1.h"
+#include "../include/GUIMyFrame1.h"
 
 class MyApp : public wxApp {
 

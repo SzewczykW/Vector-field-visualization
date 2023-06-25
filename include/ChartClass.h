@@ -63,4 +63,6 @@ private:
 	bool surface; //check if AddSurface is checked
 	double xSurface, ySurface, zSurface; //surface parameters
 	GUIMyFrame1* MainWnd; //pointer to main Window
+
 };
+

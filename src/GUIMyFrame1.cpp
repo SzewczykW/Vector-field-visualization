@@ -1,103 +1,296 @@
-#include "GUIMyFrame1.h"
+#include "../include/GUIMyFrame1.h"
 
 GUIMyFrame1::GUIMyFrame1( wxWindow* parent )
 :
 MyFrame1( parent )
 {
+	XScale->SetScrollbar(0, 1, 91, 1, true);
+	YScale->SetScrollbar(0, 1, 91, 1, true);
+	ZScale->SetScrollbar(0, 1, 91, 1, true);
+	XRot->SetScrollbar(0, 1, 360, 1, true);
+	YRot->SetScrollbar(0, 1, 360, 1, true);
+	ZRot->SetScrollbar(0, 1, 360, 1, true);
+	ArrowScale->SetScrollbar(0, 1, 100, true); //TO MOZNA BEDZIE ZMIENIC BO IDK W JAKIEJ SKALI BEDA STRZALKI
+	ArrowScale->Disable();
+	xScale_staticText->SetLabel(wxString::Format(wxT("%d"), XScale->GetThumbPosition() + 10));
+	yScale_staticText->SetLabel(wxString::Format(wxT("%d"), YScale->GetThumbPosition() + 10));
+	zScale_staticText->SetLabel(wxString::Format(wxT("%d"), ZScale->GetThumbPosition() + 10));
+	xRot_staticText->SetLabel(wxString::Format(wxT("%d"), XRot->GetThumbPosition()));
+	yRot_staticText->SetLabel(wxString::Format(wxT("%d"), YRot->GetThumbPosition()));
+	zRot_staticText->SetLabel(wxString::Format(wxT("%d"), ZRot->GetThumbPosition()));
+	arrow_staticText->SetLabel(wxString::Format(wxT("%d"), ArrowScale->GetThumbPosition()));
 
 }
 
 void GUIMyFrame1::MainPanelOnSize( wxSizeEvent& event )
 {
-// TODO: Implement MainPanelOnSize
+Repaint();
 }
 
-void GUIMyFrame1::MainPanelOnUpdateUI( wxUpdateUIEvent& event )
+void GUIMyFrame1::MainPanelRepaint( wxUpdateUIEvent& event )
 {
-// TODO: Implement MainPanelOnUpdateUI
+Repaint();
 }
 
-void GUIMyFrame1::functionOnChoice( wxCommandEvent& event )
+void GUIMyFrame1::XFunOnChoice( wxCommandEvent& event )
 {
-// TODO: Implement functionOnChoice
+XFun->GetSelection();
+Repaint();
 }
 
-void GUIMyFrame1::a_scrollBarOnScroll( wxScrollEvent& event )
+void GUIMyFrame1::AParamOnText( wxCommandEvent& event )
 {
-// TODO: Implement a_scrollBarOnScroll
+double a;
+if (XMin->GetValue().ToDouble(&a))
+{
+Repaint();
+}
+else
+{
+wxBell();
+}
 }
 
-void GUIMyFrame1::b_scrollBarOnScroll( wxScrollEvent& event )
+void GUIMyFrame1::YFunOnChoice( wxCommandEvent& event )
 {
-// TODO: Implement b_scrollBarOnScroll
+YFun->GetSelection();
+Repaint();
 }
 
-void GUIMyFrame1::x_startOnText( wxCommandEvent& event )
+void GUIMyFrame1::BParamOnText( wxCommandEvent& event )
 {
-// TODO: Implement x_startOnText
+double b;
+if (XMin->GetValue().ToDouble(&b))
+{
+Repaint();
+}
+else
+{
+wxBell();
+}
 }
 
-void GUIMyFrame1::x_stopOnText( wxCommandEvent& event )
+void GUIMyFrame1::ZFunOnChoice( wxCommandEvent& event )
 {
-// TODO: Implement x_stopOnText
+ZFun->GetSelection();
+Repaint();
 }
 
-void GUIMyFrame1::y_startOnText( wxCommandEvent& event )
+void GUIMyFrame1::CParamOnText( wxCommandEvent& event )
 {
-// TODO: Implement y_startOnText
+double c;
+if (XMin->GetValue().ToDouble(&c))
+{
+Repaint();
+}
+else
+{
+wxBell();
+}
 }
 
-void GUIMyFrame1::y_stopOnText( wxCommandEvent& event )
+void GUIMyFrame1::XScaleOnScroll( wxScrollEvent& event )
 {
-// TODO: Implement y_stopOnText
+
+xScale_staticText->SetLabel(wxString::Format(wxT("%d"), XScale->GetThumbPosition() +10));
+Repaint();
 }
 
-void GUIMyFrame1::z_startOnText( wxCommandEvent& event )
+void GUIMyFrame1::YScaleOnScroll( wxScrollEvent& event )
 {
-// TODO: Implement z_startOnText
+YScale->GetThumbPosition();
+yScale_staticText->SetLabel(wxString::Format(wxT("%d"), YScale->GetThumbPosition() + 10));
+Repaint();
 }
 
-void GUIMyFrame1::z_stopOnText( wxCommandEvent& event )
+void GUIMyFrame1::ZScaleOnScroll( wxScrollEvent& event )
 {
-// TODO: Implement z_stopOnText
+
+ZScale->GetThumbPosition();
+zScale_staticText->SetLabel(wxString::Format(wxT("%d"), ZScale->GetThumbPosition() + 10));
+Repaint();
 }
 
-void GUIMyFrame1::divideOnText( wxCommandEvent& event )
+void GUIMyFrame1::XMinOnText( wxCommandEvent& event )
 {
-// TODO: Implement divideOnText
+double x;
+if (XMin->GetValue().ToDouble(&x))
+{
+Repaint();
+}
+else
+{
+wxBell();
+}
 }
 
-void GUIMyFrame1::arrow_lengthOnScroll( wxScrollEvent& event )
+void GUIMyFrame1::XMaxOnText( wxCommandEvent& event )
 {
-// TODO: Implement arrow_lengthOnScroll
+double x;
+if (XMax->GetValue().ToDouble(&x))
+{
+Repaint();
+}
+else
+{
+wxBell();
+}
 }
 
-void GUIMyFrame1::auto_arrowsOnCheckBox( wxCommandEvent& event )
+void GUIMyFrame1::YMinOnText( wxCommandEvent& event )
 {
-// TODO: Implement auto_arrowsOnCheckBox
+double y;
+if (YMin->GetValue().ToDouble(&y))
+{
+Repaint();
+}
+else
+{
+wxBell();
+}
 }
 
-void GUIMyFrame1::x_scrollBarOnScroll( wxScrollEvent& event )
+void GUIMyFrame1::YMaxOnText( wxCommandEvent& event )
 {
-// TODO: Implement x_scrollBarOnScroll
+double y;
+if (YMax->GetValue().ToDouble(&y))
+{
+Repaint();
+}
+else
+{
+wxBell();
+}
 }
 
-void GUIMyFrame1::y_scrollBarOnScroll( wxScrollEvent& event )
+void GUIMyFrame1::ZMinOnText( wxCommandEvent& event )
 {
-// TODO: Implement y_scrollBarOnScroll
+double z;
+if (ZMin->GetValue().ToDouble(&z))
+{
+Repaint();
+}
+else
+{
+wxBell();
+}
 }
 
-void GUIMyFrame1::z_scrollBarOnScroll( wxScrollEvent& event )
+void GUIMyFrame1::ZMaxOnText( wxCommandEvent& event )
 {
-// TODO: Implement z_scrollBarOnScroll
+double z;
+if (ZMax->GetValue().ToDouble(&z))
+{
+Repaint();
+}
+else
+{
+wxBell();
+}
 }
 
-void GUIMyFrame1::addSurfaceOnCheckBox( wxCommandEvent& event )
+void GUIMyFrame1::ArrowBarOnScroll( wxScrollEvent& event )
 {
-// TODO: Implement addSurfaceOnCheckBox
+ArrowScale->GetThumbPosition();
+Repaint();
+arrow_staticText->SetLabel(wxString::Format(wxT("%d"), ArrowScale->GetThumbPosition()));
 }
 
-void GUIMyFrame1::saveOnButtonClick( wxCommandEvent& event )
+void GUIMyFrame1::AutoLenOnCheckBox( wxCommandEvent& event )
 {
-// TODO: Implement saveOnButtonClick
+	if (AutoLen->IsChecked()) {
+		ArrowScale->Disable();
+		Repaint();
+	}
+	else {
+		ArrowScale->Enable();
+		ArrowScale->GetThumbPosition();
+		Repaint();
+	}
+}
+
+void GUIMyFrame1::XRotOnScroll( wxScrollEvent& event )
+{
+XRot->GetThumbPosition();
+xRot_staticText->SetLabel(wxString::Format(wxT("%d"), XRot->GetThumbPosition()));
+Repaint();
+}
+
+void GUIMyFrame1::YRotOnScroll( wxScrollEvent& event )
+{
+YRot->GetThumbPosition();
+yRot_staticText->SetLabel(wxString::Format(wxT("%d"), YRot->GetThumbPosition()));
+Repaint();
+}
+
+void GUIMyFrame1::ZRotOnScroll( wxScrollEvent& event )
+{
+zRot_staticText->SetLabel(wxString::Format(wxT("%d"), ZRot->GetThumbPosition()));
+ZRot->GetThumbPosition();
+Repaint();
+}
+
+void GUIMyFrame1::AddSurfaceOnCheckBox( wxCommandEvent& event )
+{
+AutoLen->IsChecked();
+}
+
+void GUIMyFrame1::XSurfaceOnText( wxCommandEvent& event )
+{
+if (AddSurface->IsChecked()) {
+double x;
+if (XMin->GetValue().ToDouble(&x))
+{
+Repaint();
+}
+else
+{
+wxBell();
+}
+}
+}
+
+void GUIMyFrame1::YSurfaceOnText( wxCommandEvent& event )
+{
+if (AddSurface->IsChecked()) {
+double y;
+if (XMin->GetValue().ToDouble(&y))
+{
+Repaint();
+}
+else
+{
+wxBell();
+}
+}
+}
+
+void GUIMyFrame1::ZSurfaceOnText( wxCommandEvent& event )
+{
+if (AddSurface->IsChecked()) {
+double z;
+if (XMin->GetValue().ToDouble(&z))
+{
+Repaint();
+}
+else
+{
+wxBell();
+}
+}
+}
+
+void GUIMyFrame1::SaveButtonOnButtonClick( wxCommandEvent& event )
+{
+wxFileDialog WxSaveFileDialog(this, _("Choose a file"), _(""), _(""), _("*.*"), wxFD_SAVE);
+WxSaveFileDialog.SetWildcard("JPEG files (*.jpg)|*.jpg|BMP files(*.bmp) | *.bmp |GIF files(*.gif) | *.gif|PNG files(*.png)|*.png ");
+if (WxSaveFileDialog.ShowModal()){
+
+}
+}
+
+
+void GUIMyFrame1::Repaint() 
+{
+
 }
