@@ -29,7 +29,6 @@
 # Executables
 *.exe
 *.out
-*.ap
 
 # WxWidgets files
 *.fbp
@@ -41,4 +40,3 @@
 *.vcxproj.user
 ./.vs
 ./x64
-
