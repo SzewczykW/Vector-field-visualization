@@ -96,14 +96,14 @@ void GUIMyFrame1::XScaleOnScroll ( wxScrollEvent& event )
 
 void GUIMyFrame1::YScaleOnScroll ( wxScrollEvent& event )
 {
-	YScale->GetThumbPosition ();
+	//YScale->GetThumbPosition ();
 	yScale_staticText->SetLabel ( wxString::Format ( wxT ( "%d" ), YScale->GetThumbPosition () + 10 ) );
 	Repaint ();
 }
 
 void GUIMyFrame1::ZScaleOnScroll ( wxScrollEvent& event )
 {
-	ZScale->GetThumbPosition ();
+	//ZScale->GetThumbPosition ();
 	zScale_staticText->SetLabel ( wxString::Format ( wxT ( "%d" ), ZScale->GetThumbPosition () + 10 ) );
 	Repaint ();
 }

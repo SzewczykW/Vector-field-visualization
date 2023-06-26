@@ -1,4 +1,4 @@
-#include "ChartClass.h"
+#include "Settings.h"
 
 Settings::Settings ()
 {
@@ -145,6 +145,15 @@ bool Settings::isAutoScaled () const
 {
 	return _isAutoScaled;
 }
+Matrix Settings::GetScaleMatrix () const
+{
+	Matrix scale ( 4, 4 );
+	scale.set ( 0, 0, _xScale );
+	scale.set ( 1, 1, _yScale );
+	scale.set ( 2, 2, _zScale );
+	scale.set ( 3, 3, 1.0 );
+	return scale;
+}
 
 void Settings::SetXRot ( const double& x )
 {
@@ -170,6 +179,40 @@ double Settings::GetZRot () const
 {
 	return _zRot;
 }
+Matrix Settings::GetXRotMatrix() const
+{
+	Matrix xRot ( 4, 4 );
+	xRot.set ( 0, 0, 1.0 );
+	xRot.set ( 1, 1, cos ( _xRot ) );
+	xRot.set ( 1, 2, -sin ( _xRot ) );
+	xRot.set ( 2, 1, sin ( _xRot ) );
+	xRot.set ( 2, 2, cos ( _xRot ) );
+	xRot.set ( 3, 3, 1.0 );
+	return xRot;
+}
+Matrix Settings::GetYRotMatrix() const
+{
+	Matrix yRot ( 4, 4 );
+	yRot.set ( 0, 0, cos ( _yRot ) );
+	yRot.set ( 0, 2, sin ( _yRot ) );
+	yRot.set ( 1, 1, 1.0 );
+	yRot.set ( 2, 0, -sin ( _yRot ) );
+	yRot.set ( 2, 2, cos ( _yRot ) );
+	yRot.set ( 3, 3, 1.0 );
+	return yRot;
+}
+Matrix Settings::GetZRotMatrix() const
+{
+	Matrix zRot ( 4, 4 );
+	zRot.set ( 0, 0, cos ( _zRot ) );
+	zRot.set ( 0, 1, -sin ( _zRot ) );
+	zRot.set ( 1, 0, sin ( _zRot ) );
+	zRot.set ( 1, 1, cos ( _zRot ) );
+	zRot.set ( 2, 2, 1.0 );
+	zRot.set ( 3, 3, 1.0 );
+	return zRot;
+}
+
 
 void Settings::setSurface ( const bool& b )
 {
@@ -202,4 +245,17 @@ double Settings::GetYSurface () const
 double Settings::GetZSurface () const
 {
 	return _zSurface;
+}
+
+Matrix GetTranslationMatrix(const double& x, const double& y, const double& z)
+{
+	Matrix translation ( 4, 4 );
+	translation.set ( 0, 0, 1.0 );
+	translation.set ( 1, 1, 1.0 );
+	translation.set ( 2, 2, 1.0 );
+	translation.set ( 3, 3, 1.0 );
+	translation.set ( 0, 3, x );
+	translation.set ( 1, 3, y );
+	translation.set ( 2, 3, z );
+	return translation;
 }
