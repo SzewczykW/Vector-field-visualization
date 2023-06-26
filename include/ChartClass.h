@@ -1,68 +1,112 @@
 #pragma once
-#include "GUIMyFrame1.h"
 
+enum funType 
+{
+	A, AX, AX2, AX3, LOG_AX, EXP_AX, SIN_AX, COS_AX
+};
 
-class Chart {
-public:
-	Chart(GUIMyFrame1* wnd);
-	void SetXFun(int i) { xFun = i; }
-	void SetYFun(int i) { yFun = i; }
-	void SetZFun(int i) { zFun = i; }
-	int GetXFun() const { return xFun; }
-	int GetYFun() const { return yFun; }
-	int GetZFun() const { return zFun; }
-	void SetA(double a) { _a = a; }
-	void SetB(double b) { _b = b; }
-	void SetC(double c) { _c = c; }
-	double GetA() const { return _a; }
-	double GetB() const { return _b; }
-	double GetC() const { return _c; }
-	void SetXMin(double x) { xMin = x; }
-	void SetXMax(double x) { xMax = x; }
-	void SetYMin(double y) { yMin = y; }
-	void SetYMax(double y) { yMax = y; }
-	void SetZMin(double z) { zMin = z; }
-	void SetZMax(double z) { zMax = z; }
-	double GetXMin() const { return xMin; }
-	double GetXMax() const { return xMax; }
-	double GetYMin() const { return yMin; }
-	double GetYMax() const { return yMax; }
-	double GetZmin() const { return zMin; }
-	double GetZMax() const { return zMax; }
-	void SetXScale(int x) { xScale = x; }
-	void SetYScale(int y) { xScale = y; }
-	void SetZScale(int z) { xScale = z; }
-	int GetXScale() const { return xScale; }
-	int GetYScale() const { return yScale; }
-	int GetZScale() const { return zScale; }
-	void SetAutoLen(bool b) { autoLen = b; }
-	bool AutoLen() const { return autoLen; }
-	void SetXRot(double x) { xRot = x; }
-	void SetYRot(double y) { yRot = y; }
-	void SetZRot(double z) { zRot = z; }
-	double GetXRot() const { return xRot; }
-	double GetYRot() const { return yRot; }
-	double GetZRot() const { return zRot; }
-	void setSurface(bool b) { surface = b; }
-	bool Surface() const { return surface; }
-	void SetXSurface(double x) { xSurface = x; }
-	void SetYSurface(double y) { ySurface = y; }
-	void SetZSurface(double z) { zSurface = z; }
-	double GetXSurface() const { return xSurface; }
-	double GetYSurface() const { return ySurface; }
-	double GetZSurface() const { return zSurface; }
-	
-private:
-	int xFun, yFun, zFun; //Function type
-	double _a, _b, _c; //functions' parameters 
-	double xMin, xMax, yMin, yMax, zMin, zMax; //range of variability (??????idk how to translate it correctly)
-	int xScale, yScale, zScale; //amount of sections on axes
-	bool autoLen; //check if AutoLength is checked
-	double arrowLen;
-	double xRot, yRot, zRot; //rotation parameters
-	bool surface; //check if AddSurface is checked
-	double xSurface, ySurface, zSurface; //surface parameters
-	GUIMyFrame1* MainWnd; //pointer to main Window
+class Settings 
+{
+	public:
+		Settings ();
 
+		void SetXFun ( const funType& fun );
+		void SetYFun ( const funType& fun );
+		void SetZFun ( const funType& fun );
+		funType GetXFun () const;
+		funType GetYFun () const;
+		funType GetZFun () const;
+
+		void SetA ( const double& a );
+		void SetB ( const double& b );
+		void SetC ( const double& c );
+		double GetA () const;
+		double GetB () const;
+		double GetC () const;
+
+		void SetXMin ( const double& x );
+		void SetXMax ( const double& x );
+		void SetYMin ( const double& y );
+		void SetYMax ( const double& y );
+		void SetZMin ( const double& z );
+		void SetZMax ( const double& z );
+		double GetXMin () const;
+		double GetXMax () const;
+		double GetYMin () const;
+		double GetYMax () const;
+		double GetZmin () const;
+		double GetZMax () const;
+
+		void SetXScale ( const int& x );
+		void SetYScale ( const int& y );
+		void SetZScale ( const int& z );
+		int GetXScale () const;
+		int GetYScale () const;
+		int GetZScale () const;
+		void SetAutoScale ( const bool& a );
+		bool isAutoScaled () const;
+
+		void SetXRot ( const double& x );
+		void SetYRot ( const double& y );
+		void SetZRot ( const double& z );
+		double GetXRot () const;
+		double GetYRot () const;
+		double GetZRot () const;
+
+		void setSurface ( const bool& b );
+		bool isAdditionalSurface () const;
+		void SetXSurface ( const double& x );
+		void SetYSurface ( const double& y );
+		void SetZSurface ( const double& z );
+		double GetXSurface () const;
+		double GetYSurface () const;
+		double GetZSurface () const;
+
+	private:
+		/**
+		 * @brief Function type
+		 *
+		 */
+		funType _xFun, _yFun, _zFun;
+		/**
+		 * @brief Functions' parameters
+		 *
+		 */
+		double _a, _b, _c;
+		/**
+		 * @brief Range of axes
+		 *
+		 */
+		double _xMin, _xMax, _yMin, _yMax, _zMin, _zMax;
+		/**
+		 * @brief Scale
+		 *
+		 */
+		int _xScale, _yScale, _zScale;
+		/**
+		 * @brief Auto arrow length
+		 *
+		 */
+		bool _isAutoScaled;
+		/**
+		 * @brief Arrow length
+		 *
+		 */
+		double _arrowLen;
+		/**
+		 * @brief Rotation parameters
+		 *
+		 */
+		double _xRot, _yRot, _zRot;
+		/**
+		 * @brief Surface parameters
+		 *
+		 */
+		bool _additionalSurface;
+		/**
+		 * @brief Additional urface coordinates
+		 *
+		 */
+		double _xSurface, _ySurface, _zSurface;
 };
 
