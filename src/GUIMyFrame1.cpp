@@ -292,8 +292,10 @@ void GUIMyFrame1::SaveButtonOnButtonClick ( wxCommandEvent& event )
 	}
 }
 
-
-void GUIMyFrame1::Repaint ()
+void GUIMyFrame1::Repaint()
 {
+	wxClientDC dc1 ( MainPanel );
+	wxBufferedDC dc ( &dc1 );
 
+	_CoordinateSystem.draw( &dc );
 }

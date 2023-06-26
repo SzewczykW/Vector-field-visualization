@@ -137,9 +137,9 @@ int Settings::GetZScale () const
 {
 	return _zScale;
 }
-void Settings::SetAutoScale ( const bool& a )
+void Settings::SetAutoScale ( const bool& autoScale )
 {
-	_isAutoScaled = a;
+	_isAutoScaled = autoScale;
 }
 bool Settings::isAutoScaled () const
 {
@@ -179,7 +179,7 @@ double Settings::GetZRot () const
 {
 	return _zRot;
 }
-Matrix Settings::GetXRotMatrix() const
+Matrix Settings::GetXRotMatrix () const
 {
 	Matrix xRot ( 4, 4 );
 	xRot.set ( 0, 0, 1.0 );
@@ -190,7 +190,7 @@ Matrix Settings::GetXRotMatrix() const
 	xRot.set ( 3, 3, 1.0 );
 	return xRot;
 }
-Matrix Settings::GetYRotMatrix() const
+Matrix Settings::GetYRotMatrix () const
 {
 	Matrix yRot ( 4, 4 );
 	yRot.set ( 0, 0, cos ( _yRot ) );
@@ -201,7 +201,7 @@ Matrix Settings::GetYRotMatrix() const
 	yRot.set ( 3, 3, 1.0 );
 	return yRot;
 }
-Matrix Settings::GetZRotMatrix() const
+Matrix Settings::GetZRotMatrix () const
 {
 	Matrix zRot ( 4, 4 );
 	zRot.set ( 0, 0, cos ( _zRot ) );
@@ -214,9 +214,9 @@ Matrix Settings::GetZRotMatrix() const
 }
 
 
-void Settings::setSurface ( const bool& b )
+void Settings::setSurface ( const bool& additionalSurface )
 {
-	_additionalSurface = b;
+	_additionalSurface = additionalSurface;
 }
 bool Settings::isAdditionalSurface () const
 {
@@ -247,7 +247,7 @@ double Settings::GetZSurface () const
 	return _zSurface;
 }
 
-Matrix GetTranslationMatrix(const double& x, const double& y, const double& z)
+Matrix GetTranslationMatrix ( const double& x, const double& y, const double& z )
 {
 	Matrix translation ( 4, 4 );
 	translation.set ( 0, 0, 1.0 );
