@@ -19,6 +19,12 @@ GUIMyFrame1::GUIMyFrame1 ( wxWindow* parent )
 	yRot_staticText->SetLabel ( wxString::Format ( wxT ( "%d" ), YRot->GetThumbPosition () ) );
 	zRot_staticText->SetLabel ( wxString::Format ( wxT ( "%d" ), ZRot->GetThumbPosition () ) );
 	arrow_staticText->SetLabel ( wxString::Format ( wxT ( "%d" ), ArrowScale->GetThumbPosition () ) );
+	x0_staticText->SetLabel(_("0\u00B0"));
+	x360_staticText->SetLabel(_("360\u00B0"));
+	y0_staticText->SetLabel(_("0\u00B0"));
+	y360_staticText->SetLabel(_("360\u00B0"));
+	z0_staticText->SetLabel(_("0\u00B0"));
+	z360_staticText->SetLabel(_("360\u00B0"));
 }
 
 void GUIMyFrame1::MainPanelOnSize ( wxSizeEvent& event )
@@ -33,7 +39,7 @@ void GUIMyFrame1::MainPanelRepaint ( wxUpdateUIEvent& event )
 
 void GUIMyFrame1::XFunOnChoice ( wxCommandEvent& event )
 {
-	XFun->GetSelection ();
+	_CoordinateSystem.getSettings().SetXFun(funType(XFun->GetSelection ()));
 	Repaint ();
 }
 
@@ -42,6 +48,7 @@ void GUIMyFrame1::AParamOnText ( wxCommandEvent& event )
 	double a;
 	if ( XMin->GetValue ().ToDouble ( &a ) )
 	{
+		_CoordinateSystem.getSettings().SetA(a);
 		Repaint ();
 	}
 	else
@@ -52,7 +59,7 @@ void GUIMyFrame1::AParamOnText ( wxCommandEvent& event )
 
 void GUIMyFrame1::YFunOnChoice ( wxCommandEvent& event )
 {
-	YFun->GetSelection ();
+	_CoordinateSystem.getSettings().SetYFun(funType(YFun->GetSelection()));
 	Repaint ();
 }
 
@@ -61,6 +68,7 @@ void GUIMyFrame1::BParamOnText ( wxCommandEvent& event )
 	double b;
 	if ( XMin->GetValue ().ToDouble ( &b ) )
 	{
+		_CoordinateSystem.getSettings().SetB(b);
 		Repaint ();
 	}
 	else
@@ -71,8 +79,8 @@ void GUIMyFrame1::BParamOnText ( wxCommandEvent& event )
 
 void GUIMyFrame1::ZFunOnChoice ( wxCommandEvent& event )
 {
-	ZFun->GetSelection ();
-	Repaint ();
+	_CoordinateSystem.getSettings().SetZFun(funType(ZFun->GetSelection()));
+	Repaint();
 }
 
 void GUIMyFrame1::CParamOnText ( wxCommandEvent& event )
@@ -80,6 +88,7 @@ void GUIMyFrame1::CParamOnText ( wxCommandEvent& event )
 	double c;
 	if ( XMin->GetValue ().ToDouble ( &c ) )
 	{
+		_CoordinateSystem.getSettings().SetC(c);
 		Repaint ();
 	}
 	else
@@ -91,20 +100,21 @@ void GUIMyFrame1::CParamOnText ( wxCommandEvent& event )
 void GUIMyFrame1::XScaleOnScroll ( wxScrollEvent& event )
 {
 	xScale_staticText->SetLabel ( wxString::Format ( wxT ( "%d" ), XScale->GetThumbPosition () + 10 ) );
+	_CoordinateSystem.getSettings().SetXScale(XScale->GetThumbPosition());
 	Repaint ();
 }
 
 void GUIMyFrame1::YScaleOnScroll ( wxScrollEvent& event )
 {
-	//YScale->GetThumbPosition ();
 	yScale_staticText->SetLabel ( wxString::Format ( wxT ( "%d" ), YScale->GetThumbPosition () + 10 ) );
+	_CoordinateSystem.getSettings().SetYScale(YScale->GetThumbPosition());
 	Repaint ();
 }
 
 void GUIMyFrame1::ZScaleOnScroll ( wxScrollEvent& event )
 {
-	//ZScale->GetThumbPosition ();
 	zScale_staticText->SetLabel ( wxString::Format ( wxT ( "%d" ), ZScale->GetThumbPosition () + 10 ) );
+	_CoordinateSystem.getSettings().SetZScale(ZScale->GetThumbPosition());
 	Repaint ();
 }
 
@@ -113,6 +123,7 @@ void GUIMyFrame1::XMinOnText ( wxCommandEvent& event )
 	double x;
 	if ( XMin->GetValue ().ToDouble ( &x ) )
 	{
+		_CoordinateSystem.getSettings().SetXMin(x);
 		Repaint ();
 	}
 	else
@@ -126,6 +137,7 @@ void GUIMyFrame1::XMaxOnText ( wxCommandEvent& event )
 	double x;
 	if ( XMax->GetValue ().ToDouble ( &x ) )
 	{
+		_CoordinateSystem.getSettings().SetXMax(x);
 		Repaint ();
 	}
 	else
@@ -139,6 +151,7 @@ void GUIMyFrame1::YMinOnText ( wxCommandEvent& event )
 	double y;
 	if ( YMin->GetValue ().ToDouble ( &y ) )
 	{
+		_CoordinateSystem.getSettings().SetYMin(y);
 		Repaint ();
 	}
 	else
@@ -152,6 +165,7 @@ void GUIMyFrame1::YMaxOnText ( wxCommandEvent& event )
 	double y;
 	if ( YMax->GetValue ().ToDouble ( &y ) )
 	{
+		_CoordinateSystem.getSettings().SetYMax(y);
 		Repaint ();
 	}
 	else
@@ -165,6 +179,7 @@ void GUIMyFrame1::ZMinOnText ( wxCommandEvent& event )
 	double z;
 	if ( ZMin->GetValue ().ToDouble ( &z ) )
 	{
+		_CoordinateSystem.getSettings().SetZMin(z);
 		Repaint ();
 	}
 	else
@@ -178,6 +193,7 @@ void GUIMyFrame1::ZMaxOnText ( wxCommandEvent& event )
 	double z;
 	if ( ZMax->GetValue ().ToDouble ( &z ) )
 	{
+		_CoordinateSystem.getSettings().SetZMax(z);
 		Repaint ();
 	}
 	else
@@ -188,9 +204,9 @@ void GUIMyFrame1::ZMaxOnText ( wxCommandEvent& event )
 
 void GUIMyFrame1::ArrowBarOnScroll ( wxScrollEvent& event )
 {
-	ArrowScale->GetThumbPosition ();
-	Repaint ();
+	_CoordinateSystem.getSettings().SetArrowLength(ArrowScale->GetThumbPosition ());
 	arrow_staticText->SetLabel ( wxString::Format ( wxT ( "%d" ), ArrowScale->GetThumbPosition () ) );
+	Repaint();
 }
 
 void GUIMyFrame1::AutoLenOnCheckBox ( wxCommandEvent& event )
@@ -198,40 +214,43 @@ void GUIMyFrame1::AutoLenOnCheckBox ( wxCommandEvent& event )
 	if ( AutoLen->IsChecked () )
 	{
 		ArrowScale->Disable ();
+		_CoordinateSystem.getSettings().SetAutoScale(true);
 		Repaint ();
 	}
 	else
 	{
 		ArrowScale->Enable ();
-		ArrowScale->GetThumbPosition ();
+		_CoordinateSystem.getSettings().SetAutoScale(false);
+		_CoordinateSystem.getSettings().SetArrowLength(ArrowScale->GetThumbPosition());
 		Repaint ();
 	}
 }
 
 void GUIMyFrame1::XRotOnScroll ( wxScrollEvent& event )
 {
-	XRot->GetThumbPosition ();
+	_CoordinateSystem.getSettings ().SetXRot ( XRot->GetThumbPosition () );
 	xRot_staticText->SetLabel ( wxString::Format ( wxT ( "%d" ), XRot->GetThumbPosition () ) );
 	Repaint ();
 }
 
 void GUIMyFrame1::YRotOnScroll ( wxScrollEvent& event )
 {
-	YRot->GetThumbPosition ();
+	_CoordinateSystem.getSettings().SetYRot(YRot->GetThumbPosition());
 	yRot_staticText->SetLabel ( wxString::Format ( wxT ( "%d" ), YRot->GetThumbPosition () ) );
 	Repaint ();
 }
 
 void GUIMyFrame1::ZRotOnScroll ( wxScrollEvent& event )
 {
+	_CoordinateSystem.getSettings().SetZRot(ZRot->GetThumbPosition());
 	zRot_staticText->SetLabel ( wxString::Format ( wxT ( "%d" ), ZRot->GetThumbPosition () ) );
-	ZRot->GetThumbPosition ();
 	Repaint ();
 }
 
 void GUIMyFrame1::AddSurfaceOnCheckBox ( wxCommandEvent& event )
 {
-	AutoLen->IsChecked ();
+	_CoordinateSystem.getSettings().setSurface(AutoLen->IsChecked ());
+	Repaint();
 }
 
 void GUIMyFrame1::XSurfaceOnText ( wxCommandEvent& event )
@@ -241,6 +260,7 @@ void GUIMyFrame1::XSurfaceOnText ( wxCommandEvent& event )
 		double x;
 		if ( XMin->GetValue ().ToDouble ( &x ) )
 		{
+			_CoordinateSystem.getSettings().SetXSurface(x);
 			Repaint ();
 		}
 		else
@@ -257,6 +277,7 @@ void GUIMyFrame1::YSurfaceOnText ( wxCommandEvent& event )
 		double y;
 		if ( XMin->GetValue ().ToDouble ( &y ) )
 		{
+			_CoordinateSystem.getSettings().SetYSurface(y);
 			Repaint ();
 		}
 		else
@@ -273,6 +294,7 @@ void GUIMyFrame1::ZSurfaceOnText ( wxCommandEvent& event )
 		double z;
 		if ( XMin->GetValue ().ToDouble ( &z ) )
 		{
+			_CoordinateSystem.getSettings().SetZSurface(z);
 			Repaint ();
 		}
 		else

@@ -19,15 +19,19 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\ChartClass.h" />
+    <ClInclude Include="include\CoordinateSystem.h" />
     <ClInclude Include="include\GUI.h" />
     <ClInclude Include="include\GUIMyFrame1.h" />
+    <ClInclude Include="include\MatrixOperations.h" />
+    <ClInclude Include="include\Settings.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\ChartClass.cpp" />
+    <ClCompile Include="src\CoordinateSystem.cpp" />
     <ClCompile Include="src\GUI.cpp" />
     <ClCompile Include="src\GUIMyFrame1.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\MatrixOperations.cpp" />
+    <ClCompile Include="src\Settings.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -83,7 +87,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>C:\Users\DETO_NAT_OR\Documents\wxWidgets-3.2.2.1\include\msvc;C:\Users\DETO_NAT_OR\Documents\wxWidgets-3.2.2.1\include\;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>C:\Users\DETO_NAT_OR\Documents\wxWidgets-3.2.2.1\include\msvc;$(ProjectDir)\include;C:\Users\DETO_NAT_OR\Documents\wxWidgets-3.2.2.1\include\;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
     <LibraryPath>C:\Users\DETO_NAT_OR\Documents\wxWidgets-3.2.2.1\lib\vc_x64_lib;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -122,9 +126,10 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -137,9 +142,10 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

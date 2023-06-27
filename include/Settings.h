@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cmath>
+#include <wx/dcbuffer.h >
 #include "MatrixOperations.h"
 
 enum funType 
@@ -48,6 +49,8 @@ class Settings
 		int GetZScale () const;
 		void SetAutoScale ( const bool& autoScale );
 		bool isAutoScaled () const;
+		void SetArrowLength (const double& len);
+		double GetArrowLength () const;
 		Matrix GetScaleMatrix () const;
 
 		void SetXRot ( const double& x );
