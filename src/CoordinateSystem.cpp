@@ -48,12 +48,17 @@ void CoordinateSystem::drawAxes ( wxDC* dc ) const
 {
     // Draw axes
     dc->SetPen ( wxPen ( wxColour ( 0, 0, 0 ), 1 ) );
+    dc->DrawLine ( 0, 0, 100, 100 );
+    dc->DrawLine ( 0, 0, 100, 0 );
+    dc->DrawLine ( 0, 0, 0, 100 );
 }
 
 void CoordinateSystem::drawArrow ( wxDC* dc ) const
 {
     // Draw arrow
     dc->SetPen ( wxPen ( wxColour ( 255, 0, 0 ), 1 ) );
+    dc->DrawLine ( 0, 0, 100, 100 );
+    
 }
 
 void CoordinateSystem::drawSurface(wxDC* dc) const

@@ -253,7 +253,7 @@ double Settings::GetZSurface () const
 	return _zSurface;
 }
 
-Matrix GetTranslationMatrix ( const double& x, const double& y, const double& z )
+Matrix GetTranslationMatrix ( const double& x, const double& y, const double& z ) const
 {
 	Matrix translation ( 4, 4 );
 	translation.set ( 0, 0, 1.0 );

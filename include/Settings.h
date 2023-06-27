@@ -1,7 +1,6 @@
 #pragma once
 
 #include <cmath>
-#include <wx/dcbuffer.h >
 #include "MatrixOperations.h"
 
 enum funType 
@@ -74,9 +73,7 @@ class Settings
 		double GetZSurface () const;
 
 		Matrix GetTranslationMatrix ( const double& x, const double& y, const double& z ) const;
-
 		
-
 	private:
 		/**
 		 * @brief Function type
