@@ -46,7 +46,7 @@ void GUIMyFrame1::XFunOnChoice ( wxCommandEvent& event )
 void GUIMyFrame1::AParamOnText ( wxCommandEvent& event )
 {
 	double a;
-	if ( XMin->GetValue ().ToDouble ( &a ) )
+	if (AParam->GetValue ().ToDouble ( &a ) )
 	{
 		_CoordinateSystem.getSettings().SetA(a);
 		Repaint ();
@@ -66,7 +66,7 @@ void GUIMyFrame1::YFunOnChoice ( wxCommandEvent& event )
 void GUIMyFrame1::BParamOnText ( wxCommandEvent& event )
 {
 	double b;
-	if ( XMin->GetValue ().ToDouble ( &b ) )
+	if (BParam->GetValue ().ToDouble ( &b ) )
 	{
 		_CoordinateSystem.getSettings().SetB(b);
 		Repaint ();
@@ -86,7 +86,7 @@ void GUIMyFrame1::ZFunOnChoice ( wxCommandEvent& event )
 void GUIMyFrame1::CParamOnText ( wxCommandEvent& event )
 {
 	double c;
-	if ( XMin->GetValue ().ToDouble ( &c ) )
+	if (CParam->GetValue ().ToDouble ( &c ) )
 	{
 		_CoordinateSystem.getSettings().SetC(c);
 		Repaint ();
@@ -258,7 +258,7 @@ void GUIMyFrame1::XSurfaceOnText ( wxCommandEvent& event )
 	if ( AddSurface->IsChecked () )
 	{
 		double x;
-		if ( XMin->GetValue ().ToDouble ( &x ) )
+		if ( XSurface->GetValue ().ToDouble ( &x ) )
 		{
 			_CoordinateSystem.getSettings().SetXSurface(x);
 			Repaint ();
@@ -275,7 +275,7 @@ void GUIMyFrame1::YSurfaceOnText ( wxCommandEvent& event )
 	if ( AddSurface->IsChecked () )
 	{
 		double y;
-		if ( XMin->GetValue ().ToDouble ( &y ) )
+		if ( YSurface->GetValue ().ToDouble ( &y ) )
 		{
 			_CoordinateSystem.getSettings().SetYSurface(y);
 			Repaint ();
@@ -292,7 +292,7 @@ void GUIMyFrame1::ZSurfaceOnText ( wxCommandEvent& event )
 	if ( AddSurface->IsChecked () )
 	{
 		double z;
-		if ( XMin->GetValue ().ToDouble ( &z ) )
+		if ( ZSurface->GetValue ().ToDouble ( &z ) )
 		{
 			_CoordinateSystem.getSettings().SetZSurface(z);
 			Repaint ();

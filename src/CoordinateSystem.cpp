@@ -57,7 +57,7 @@ void CoordinateSystem::setSettings ( const Settings& settings )
     _Settings = settings;
 }
 
-Settings CoordinateSystem::getSettings () const
+Settings& CoordinateSystem::getSettings ()
 {
     return _Settings;
 }
