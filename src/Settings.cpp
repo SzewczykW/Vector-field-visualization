@@ -137,6 +137,12 @@ int Settings::GetZScale () const
 {
 	return _zScale;
 }
+void Settings::SetArrowLength ( const double& len ) {
+	_arrowLen = len;
+}
+double Settings::GetArrowLength() const {
+	return _arrowLen;
+}
 void Settings::SetAutoScale ( const bool& autoScale )
 {
 	_isAutoScaled = autoScale;
