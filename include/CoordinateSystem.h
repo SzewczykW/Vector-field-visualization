@@ -16,7 +16,7 @@ class CoordinateSystem
     public:
         CoordinateSystem ();
         void setSettings ( const Settings& settings );
-        Settings& getSettings ();
+        Settings& getSettings () ;
         void draw ( wxDC* dc ) const;
         void drawAxes ( wxDC* dc ) const;
         void drawArrow ( wxDC* dc ) const;

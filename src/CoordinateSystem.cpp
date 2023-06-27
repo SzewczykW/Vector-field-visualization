@@ -29,7 +29,7 @@ void CoordinateSystem::setSettings ( const Settings& settings )
     _Settings = settings;
 }
 
-Settings CoordinateSystem::getSettings () const
+Settings& CoordinateSystem::getSettings ()
 {
     return _Settings;
 }
@@ -58,7 +58,7 @@ void CoordinateSystem::drawArrow ( wxDC* dc ) const
     // Draw arrow
     dc->SetPen ( wxPen ( wxColour ( 255, 0, 0 ), 1 ) );
     dc->DrawLine ( 0, 0, 100, 100 );
-    
+
 }
 
 void CoordinateSystem::drawSurface(wxDC* dc) const
