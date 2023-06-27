@@ -37,7 +37,7 @@ class Settings
 		double GetXMax () const;
 		double GetYMin () const;
 		double GetYMax () const;
-		double GetZmin () const;
+		double GetZMin () const;
 		double GetZMax () const;
 
 		void SetXScale ( const int& x );

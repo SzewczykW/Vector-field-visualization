@@ -38,7 +38,6 @@ class MyFrame1 : public wxFrame
 	private:
 
 	protected:
-		wxPanel* MainPanel;
 		wxStaticText* m_staticText1;
 		wxStaticText* m_staticText2;
 		wxChoice* XFun;
@@ -141,6 +140,7 @@ class MyFrame1 : public wxFrame
 
 
 	public:
+		wxPanel* MainPanel;
 
 		MyFrame1( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Vector Field Visualisation"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 1000,800 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
 
