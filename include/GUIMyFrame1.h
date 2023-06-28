@@ -43,7 +43,8 @@ class GUIMyFrame1 : public MyFrame1
 		void XSurfaceOnText( wxCommandEvent& event );
 		void YSurfaceOnText( wxCommandEvent& event );
 		void ZSurfaceOnText( wxCommandEvent& event );
-		void SaveButtonOnButtonClick( wxCommandEvent& event );
+		void SaveButtonOnButtonClick( wxCommandEvent& event );		
+
 	public:
 		/** Constructor */
 		GUIMyFrame1( wxWindow* parent );

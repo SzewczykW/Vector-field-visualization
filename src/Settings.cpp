@@ -253,6 +253,52 @@ double Settings::GetZSurface () const
 	return _zSurface;
 }
 
+double Settings::Calc(const int type, const double x) const 
+{
+	double param;
+	funType fun;
+	if (type == 0)
+	{
+		param = _a;
+		fun = GetXFun();
+	}
+	else if (type == 1)
+	{
+		param = _b;
+		fun = GetYFun();
+	}
+	else if (type == 2)
+	{
+		param = _c;
+		fun = GetZFun();
+	}
+	else return 0;
+	switch (fun)
+	{
+		case A:
+			return param;
+		case AX:
+			return param * x;
+		case AX2:
+			return param * pow(x, 2);
+		case AX3:
+			return param * pow(x, 3);
+		case LOG_AX:
+			if((param *x)>0)
+				return log(param * x);
+			return 0;
+		case EXP_AX:
+			return exp(param * x);
+		case SIN_AX:
+			return sin(param * x);
+		case COS_AX:
+			return cos(param * x);
+		default:
+			return 0;
+	}
+}
+
+
 Matrix Settings::GetTranslationMatrix ( const double& x, const double& y, const double& z ) const
 {
 	Matrix translation ( 4, 4 );

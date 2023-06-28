@@ -136,19 +136,76 @@ void CoordinateSystem::drawAxes ( wxDC* dc, const double& width, const double& h
 	}
 }
 
-void CoordinateSystem::drawArrow ( wxDC* dc, const double& width, const double& height ) const
+void CoordinateSystem::drawArrow ( wxDC* dc, const double& width, const double& height) const
 {
     // Draw arrow
-
+    //to chyba mozna by bylo jako jakies parametry zrobic, a nie zmienne lokalne w funkcjach
+    auto leftDownCornerX = 0;
+    auto leftDownCornerY = height;
+    auto centerX = width / 2;
+    auto centerY = height / 2;
+    auto offsetX = width / 8;
+    auto offsetY = height / 5;
+    dc->SetPen(wxPen(wxColor(0, 0, 0)));
+    auto xMin = _Settings.GetXMin();
+    auto xMax = _Settings.GetXMax();
+    auto yMin = _Settings.GetYMin();
+    auto yMax = _Settings.GetYMax();
+    auto zMin = _Settings.GetZMin();
+    auto zMax = _Settings.GetZMax();
+    auto xScale = _Settings.GetXScale();
+    auto yScale = _Settings.GetYScale();
+    auto zScale = _Settings.GetZScale();
+    auto XAxStartX = offsetX;
+    auto XAxStartY = height - 2 * offsetY;
+    auto XAxEndX = centerX;
+    auto XAxEndY = height - offsetY;
+    auto XAxLen = sqrt(pow(XAxEndX - XAxStartX, 2) + pow(XAxEndY - XAxStartY, 2));
+    auto YAxStartX = XAxEndX;
+    auto YAxStartY = XAxEndY;
+    auto YAxEndX = XAxEndX + 0.9 * XAxLen * cos(M_PI / 6);
+    auto YAxEndY = XAxEndY - 0.9 * XAxLen * sin(M_PI / 6);
+    auto YAxLen = sqrt(pow(YAxEndX - YAxStartX, 2) + pow(YAxEndY - YAxStartY, 2));
+    auto ZAxStartX = YAxEndX;
+    auto ZAxStartY = YAxEndY;
+    auto ZAxEndX = ZAxStartX;
+    auto ZAxEndY = ZAxStartY - YAxLen;
+    for (int k = 0; k <= 2; k++) {
+        auto h = k * (ZAxEndY - ZAxStartY) / 2;
+        for (int j = 0; j <= 10; j++)
+        {
+            for (int i = 0; i <= 10; i++)
+            {
+                auto x = XAxStartX + i * (XAxEndX - XAxStartX) / 10 + j * (YAxEndX - YAxStartX) / 10;
+                auto y = XAxStartY + i * (XAxEndY - XAxStartY) / 10 + j * (YAxEndY - YAxStartY) / 10;
+                //wartosci x,y,z wzgledem ukladu wspolrzednych
+                auto x1 = xMin + i * (xMax - xMin) / xScale;
+                auto y1 = yMin + j * (yMax - yMin) / yScale;
+                auto z1 = zMin + k * (zMax - zMin) / 2.0;
+                //wartosc funkcji
+                auto x2 = _Settings.Calc(0, x1);
+                auto y2 = _Settings.Calc(1, y1);
+                auto z2 = _Settings.Calc(2, z1);
+                //nie mam w ogole pomyslu na to w jaki sposob ogarnac te zmienne x i y do rysowania, mam wrazenie ze something is no yes
+                dc->DrawLine(x, y + h, x, y + h - z2);
+                //5 jest magic numberem ktory zostanie potem zamieniony zeby te strzalki rysowac proporcjonalne w bok, ale musze wymyslic jakies rzutowanie tego x i y
+                //zostana tez dodane warunki zeby nie rysowalo strzalek gdy ich dlugosc jest rowna 0
+                dc->DrawLine(x, y + h - z2, x - 5, y + h - ((z2-z1) * 0.9));
+                dc->DrawLine(x, y + h - z2, x + 5, y + h - ((z2-z1) * 0.9));
+            }
+        }
+    }
 }
 
-void CoordinateSystem::drawSurface ( wxDC* dc, const double& width, const double& height ) const
+void CoordinateSystem::drawSurface ( wxDC* dc, const double& width, const double& height) const
 {
     // Draw surface
+
 }
 
 void CoordinateSystem::drawVectorField ( wxDC* dc, const double& width, const double& height ) const
 {
     // Draw vector field
+    
 }
 

@@ -20,8 +20,8 @@ class CoordinateSystem
         Settings& getSettings () ;
         void draw ( wxDC* dc, const double& width, const double& height ) const;
         void drawAxes ( wxDC* dc, const double& width, const double& height ) const;
-        void drawArrow ( wxDC* dc, const double& width, const double& height ) const;
-        void drawSurface ( wxDC* dc, const double& width, const double& height ) const;
+        void drawArrow ( wxDC* dc, const double& width, const double& height) const;
+        void drawSurface ( wxDC* dc, const double& width, const double& height) const;
         void drawVectorField ( wxDC* dc, const double& width, const double& height ) const;
     private:
         /**

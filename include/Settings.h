@@ -72,6 +72,9 @@ class Settings
 		double GetYSurface () const;
 		double GetZSurface () const;
 
+		double Calc(const int type, const double x) const;
+
+
 		Matrix GetTranslationMatrix ( const double& x, const double& y, const double& z ) const;
 		
 	private:
