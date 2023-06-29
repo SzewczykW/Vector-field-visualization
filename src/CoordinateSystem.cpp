@@ -105,6 +105,36 @@ void CoordinateSystem::drawSurface ( wxDC* dc, const double& width, const double
 
 void CoordinateSystem::drawVectorField ( wxDC* dc, const double& width, const double& height ) const
 {
+    auto xMin = _Settings->GetXMin();
+    auto xMax = _Settings->GetXMax();
+    auto yMin = _Settings->GetYMin();
+    auto yMax = _Settings->GetYMax();
+    auto zMin = _Settings->GetZMin();
+    auto zMax = _Settings->GetZMax();
+    //TO GOWNO NIE DZIALA JESZCZE !!!!!
+    // 
+    // 
+    //for (int k = 0; k <= 2; k++)
+    //{
+    //    double h = (zMax - zMin) / 3.0;
+    //    double z1 = zMin + k * h;
+    //    double z2 = _Settings->Calc(2, z1);
+
+    //    for (int j = 0; j <= 10; j++)
+    //    {
+    //        double g = (yMax - yMin) / 10.0;
+    //        double y1 = yMin + g * j;
+    //        double y2 = _Settings->Calc(1, y1);
+
+    //        for (int i = 0; i <= 10; i++)
+    //        {
+    //            double f = (xMax - xMin) / 10.0;
+    //            double x1 = xMin + i * f;
+    //            double x2 = _Settings->Calc(0, x1);
+    //            drawLine(dc, _Settings->GetXRotMatrix(), x1, y1, z1, x2, y2, z2, wxColor(0, 0, 0), width, height);
+    //        }
+    //    }
+    //}
     // Draw vector field
 
     // auto leftDownCornerX = 0;
@@ -114,12 +144,6 @@ void CoordinateSystem::drawVectorField ( wxDC* dc, const double& width, const do
     // auto offsetX = width / 8;
     // auto offsetY = height / 5;
     // dc->SetPen(wxPen(wxColor(0, 0, 0)));
-    // auto xMin = _Settings->GetXMin();
-    // auto xMax = _Settings->GetXMax();
-    // auto yMin = _Settings->GetYMin();
-    // auto yMax = _Settings->GetYMax();
-    // auto zMin = _Settings->GetZMin();
-    // auto zMax = _Settings->GetZMax();
     // auto xScale = _Settings->GetXScale();
     // auto yScale = _Settings->GetYScale();
     // auto zScale = _Settings->GetZScale();
@@ -173,7 +197,7 @@ Projection CoordinateSystem::project ( const double& x, const double& y, const d
     Matrix transform(4, 4), scale(4, 4);
 
     //matrix to translate our coordinate system to center of screen
-    transform = transform.translate(width / 96.0, -width / 96.0, 0);
+    transform = transform.translate(width / 128.0, -width / 128.0, 0);
 
     //scaling coord system so it would be readable
     scale.set(0, 0, width / 16.0);
@@ -185,7 +209,7 @@ Projection CoordinateSystem::project ( const double& x, const double& y, const d
     transform = scale * transform;
 
     //projection matrix parameters
-    double n = width / 2.0; //literally dont know why this works, changing 2 to bigger number enlengthens z-axis and placement so its really sensitive
+    double n = width / 1.5; //literally dont know why this works, changing divider enlengthens/shortens z-axis and placement so its really sensitive
     double f = width;
     double l = 0;
     double r = width;
