@@ -111,30 +111,28 @@ void CoordinateSystem::drawVectorField ( wxDC* dc, const double& width, const do
     auto yMax = _Settings->GetYMax();
     auto zMin = _Settings->GetZMin();
     auto zMax = _Settings->GetZMax();
-    //TO GOWNO NIE DZIALA JESZCZE !!!!!
-    // 
-    // 
-    //for (int k = 0; k <= 2; k++)
-    //{
-    //    double h = (zMax - zMin) / 3.0;
-    //    double z1 = zMin + k * h;
-    //    double z2 = _Settings->Calc(2, z1);
 
-    //    for (int j = 0; j <= 10; j++)
-    //    {
-    //        double g = (yMax - yMin) / 10.0;
-    //        double y1 = yMin + g * j;
-    //        double y2 = _Settings->Calc(1, y1);
+    for (int k = 0; k <= 1; k++)
+    {
+        double h = (zMax - zMin) / 3.0;
+        double z1 = zMin + k * h;
+        double z2 = _Settings->Calc(2, z1);
 
-    //        for (int i = 0; i <= 10; i++)
-    //        {
-    //            double f = (xMax - xMin) / 10.0;
-    //            double x1 = xMin + i * f;
-    //            double x2 = _Settings->Calc(0, x1);
-    //            drawLine(dc, _Settings->GetXRotMatrix(), x1, y1, z1, x2, y2, z2, wxColor(0, 0, 0), width, height);
-    //        }
-    //    }
-    //}
+        for (int j = 0; j <= 1; j++)
+        {
+            double g = (yMax - yMin) / 10.0;
+            double y1 = yMin + g * j;
+            double y2 = _Settings->Calc(1, y1);
+
+            for (int i = 0; i <= 1; i++)
+            {
+                double f = (xMax - xMin) / 10.0;
+                double x1 = xMin + i * f;
+                double x2 = _Settings->Calc(0, x1);
+                drawLine(dc, _Settings->GetXRotMatrix(), x1, y1, z1, x2, y2, z2, wxColor(0, 0, 0), width, height);
+            }
+        }
+    }
     // Draw vector field
 
     // auto leftDownCornerX = 0;
