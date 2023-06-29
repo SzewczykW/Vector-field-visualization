@@ -101,7 +101,7 @@ Projection CoordinateSystem::project ( const double& x, const double& y, const d
     Vector4D input ( x, y, z );
 
     //matrix to translate our coordinate system to center of screen
-    auto translation = _Settings->GetTranslationMatrix ( width / 128.0, -width / 128.0, 0 );
+    auto translation = _Settings->GetTranslationMatrix ( width / 2.0, -width / 2.0, 0 );
 
     //rotation matrices
     auto rotationX = _Settings->GetXRotMatrix ();
@@ -116,8 +116,8 @@ Projection CoordinateSystem::project ( const double& x, const double& y, const d
 
     //projection matrix parameters
     //near and far are set to 1 and -1
-    double n = 1.5 * width; // near has to be positive and different than absolute value of far
-    double f = width; // far has to be negative
+    double n = width/2; // near has to be positive and different than absolute value of far
+    double f = -height/2; // far has to be negative
     //left, right, top, bottom are set to width and height of screen
     double l = 0;
     double r = width;
