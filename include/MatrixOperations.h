@@ -46,6 +46,14 @@ class Matrix {
 
     Matrix transpose () const;
 
+    // these functions return tranformation matrices based on given parameters
+    Matrix translate(const double &x, const double &y,const double &z) const;
+    Matrix scale(const double& x, const double& y, const double& z) const;
+    Matrix rotateX(double rotation) const;
+    Matrix rotateY(double rotation) const;
+    Matrix rotateZ(double rotation) const;
+
+
     void setZero ();
 
     static Matrix identity ( int size );

@@ -188,32 +188,35 @@ double Settings::GetZRot () const
 Matrix Settings::GetXRotMatrix () const
 {
 	Matrix xRot ( 4, 4 );
+	double rot = (_xRot * 3.14159) / 180.0;
 	xRot.set ( 0, 0, 1.0 );
-	xRot.set ( 1, 1, cos ( _xRot ) );
-	xRot.set ( 1, 2, -sin ( _xRot ) );
-	xRot.set ( 2, 1, sin ( _xRot ) );
-	xRot.set ( 2, 2, cos ( _xRot ) );
+	xRot.set ( 1, 1, cos ( rot ) );
+	xRot.set ( 1, 2, -sin ( rot ) );
+	xRot.set ( 2, 1, sin ( rot ) );
+	xRot.set ( 2, 2, cos ( rot ) );
 	xRot.set ( 3, 3, 1.0 );
 	return xRot;
 }
 Matrix Settings::GetYRotMatrix () const
 {
 	Matrix yRot ( 4, 4 );
-	yRot.set ( 0, 0, cos ( _yRot ) );
-	yRot.set ( 0, 2, sin ( _yRot ) );
+	double rot = (_yRot * 3.14159) / 180.0;
+	yRot.set ( 0, 0, cos ( rot ) );
+	yRot.set ( 0, 2, sin ( rot ) );
 	yRot.set ( 1, 1, 1.0 );
-	yRot.set ( 2, 0, -sin ( _yRot ) );
-	yRot.set ( 2, 2, cos ( _yRot ) );
+	yRot.set ( 2, 0, -sin ( rot ) );
+	yRot.set ( 2, 2, cos ( rot ) );
 	yRot.set ( 3, 3, 1.0 );
 	return yRot;
 }
 Matrix Settings::GetZRotMatrix () const
 {
 	Matrix zRot ( 4, 4 );
-	zRot.set ( 0, 0, cos ( _zRot ) );
-	zRot.set ( 0, 1, -sin ( _zRot ) );
-	zRot.set ( 1, 0, sin ( _zRot ) );
-	zRot.set ( 1, 1, cos ( _zRot ) );
+	double rot = (_zRot * 3.14159) / 180.0;
+	zRot.set ( 0, 0, cos ( rot ) );
+	zRot.set ( 0, 1, -sin ( rot ) );
+	zRot.set ( 1, 0, sin ( rot ) );
+	zRot.set ( 1, 1, cos ( rot ) );
 	zRot.set ( 2, 2, 1.0 );
 	zRot.set ( 3, 3, 1.0 );
 	return zRot;

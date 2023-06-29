@@ -73,15 +73,21 @@ void CoordinateSystem::drawAxes ( wxDC* dc, const double& width, const double& h
     auto yMax = _Settings->GetYMax ();
     auto zMin = _Settings->GetZMin ();
     auto zMax = _Settings->GetZMax ();
+ 
+    Matrix fit_to_canvas(4, 4);
+    fit_to_canvas.set(0, 0, width / 2.0);
+    fit_to_canvas.set(1, 1, -height / 2.0);
+    fit_to_canvas.set(0, 1, width / 2.0);
+    fit_to_canvas.set(1, 3, height / 2.0);
 
-    auto t = _Settings->GetXRotMatrix ();
+    auto t =fit_to_canvas * _Settings->GetXRotMatrix ();
 
     drawLine ( dc, t, xMin, 0, 0, xMax, 0, 0, wxColor(255, 0, 0));
 
-    t = _Settings->GetYRotMatrix();
+    t = fit_to_canvas * _Settings->GetYRotMatrix();
     drawLine ( dc, t, 0, yMin, 0, 0, yMax, 0, wxColor(0, 255, 0));
 
-    t = _Settings->GetZRotMatrix();
+    t = fit_to_canvas * _Settings->GetZRotMatrix();
     drawLine ( dc, t, 0, 0, zMin, 0, 0, zMax, wxColor(0, 0, 255));
 }
 
@@ -165,8 +171,20 @@ void CoordinateSystem::drawVectorField ( wxDC* dc, const double& width, const do
 Projection CoordinateSystem::project ( const double& x, const double& y, const double& z, const double& focalLength ) const
 {
     Projection projection;
-    projection.x = x * focalLength / ( z + focalLength );
-    projection.y = y * focalLength / ( z + focalLength );
+    Matrix rot(4, 4);
+    Matrix to2D(4, 4);
+
+    to2D.set(0, 0, 1.0);
+    to2D.set(1, 1, 1.0);
+    to2D.set(2, 2, 0.0);
+    to2D.set(3, 3, 1.0);
+
+    Vector4D base(x, y, z);
+    Vector4D newBase(rot.rotateX(0.61) * rot.rotateY(3.14159 / 4.0) * base);
+    Vector4D base2D(to2D * newBase);
+
+    projection.x = base2D.getX();
+    projection.y = base2D.getY();
     return projection;
 }
 

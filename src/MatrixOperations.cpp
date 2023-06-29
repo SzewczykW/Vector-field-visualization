@@ -109,6 +109,79 @@ Matrix Matrix::transpose () const
     return result;
 }
 
+Matrix Matrix::translate(const double& x, const double& y, const double& z) const 
+{ 
+    Matrix translation(4, 4);
+    
+    translation.set(0, 0, 1.0);
+    translation.set(1, 1, 1.0);
+    translation.set(2, 2, 1.0);
+    translation.set(3, 3, 1.0);
+    
+    translation.set(0, 3, x);
+    translation.set(1, 3, y);
+    translation.set(2, 3, z);
+
+    return translation;
+}
+
+Matrix Matrix::scale(const double& x, const double& y, const double& z) const 
+{
+    Matrix scaling(4, 4);
+
+    scaling.set(0, 0, x);
+    scaling.set(1, 1, y);
+    scaling.set(2, 2, z);
+    scaling.set(3, 3, 1.0);
+
+    return scaling;
+}
+
+Matrix Matrix::rotateX(double rotation) const
+{
+    rotation = (rotation * 3.14159) / 180.0;
+    Matrix rot(4, 4);
+ 
+    rot.set(0, 0, 1.0);
+    rot.set(1, 1, cos(rotation));
+    rot.set(2, 2, cos(rotation));
+    rot.set(1, 2, -sin(rotation));
+    rot.set(2, 1, sin(rotation));
+    rot.set(3, 3, 1.0);
+
+    return rot;
+}
+
+Matrix Matrix::rotateY(double rotation) const
+{
+    rotation = (rotation * 3.14159) / 180.0;
+    Matrix rot(4, 4);
+
+    rot.set(0, 0, cos(rotation));
+    rot.set(1, 1, 1.0);
+    rot.set(2, 2, cos(rotation));
+    rot.set(2, 0, -sin(rotation));
+    rot.set(0, 2, sin(rotation));
+    rot.set(3, 3, 1.0);
+
+    return rot;
+}
+
+Matrix Matrix::rotateZ(double rotation) const
+{
+    rotation = (rotation * 3.14159) / 180.0;
+    Matrix rot(4, 4);
+
+    rot.set(0, 0, cos(rotation));
+    rot.set(1, 1, cos(rotation));
+    rot.set(2, 2, 1.0);
+    rot.set(0, 1, -sin(rotation));
+    rot.set(1, 0, sin(rotation));
+    rot.set(3, 3, 1.0);
+
+    return rot;
+}
+
 void Matrix::setZero ()
 {
     for ( int i = 0; i < _Rows * _Cols; ++i )
@@ -129,20 +202,18 @@ Matrix Matrix::identity ( int size )
 
 Vector4D::Vector4D ()
 {
-    _Vector.reserve ( 4 );
-    setX ( 0.0 );
-    setY ( 0.0 );
-    setZ ( 0.0 );
-    _Vector[3] = 1.0;
+    _Vector.emplace_back(0.0);
+    _Vector.emplace_back(0.0);
+    _Vector.emplace_back(0.0);
+    _Vector.emplace_back(1.0);
 }
 
 Vector4D::Vector4D ( const double& x, const double& y, const double& z )
 {
-    _Vector.reserve ( 4 );
-    setX ( x );
-    setY ( y );
-    setZ ( z );
-    _Vector[3] = 1.0;
+    _Vector.emplace_back(x);
+    _Vector.emplace_back(y);
+    _Vector.emplace_back(z);
+    _Vector.emplace_back(1.0);
 }
 
 Vector4D::Vector4D ( const Vector4D& other )
@@ -156,7 +227,8 @@ Vector4D::Vector4D ( const Vector4D& other )
 
 Vector4D& Vector4D::operator=(const Vector4D& other)
 {
-	setX ( other.getX () );
+    _Vector.reserve(4);
+    setX ( other.getX () );
 	setY ( other.getY () );
 	setZ ( other.getZ () );
 	_Vector[3] = 1.0;
