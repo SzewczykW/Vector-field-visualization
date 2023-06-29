@@ -73,22 +73,18 @@ void CoordinateSystem::drawAxes ( wxDC* dc, const double& width, const double& h
     auto yMax = _Settings->GetYMax ();
     auto zMin = _Settings->GetZMin ();
     auto zMax = _Settings->GetZMax ();
- 
-    Matrix fit_to_canvas(4, 4);
-    fit_to_canvas.set(0, 0, width / 2.0);
-    fit_to_canvas.set(1, 1, -height / 2.0);
-    fit_to_canvas.set(0, 1, width / 2.0);
-    fit_to_canvas.set(1, 3, height / 2.0);
 
-    auto t =fit_to_canvas * _Settings->GetXRotMatrix ();
+    //TRANSFROMATION MATRIX = projection * rotation * input
+    //najpierw rzutowanie potem obracanie
+    auto t = _Settings->GetXRotMatrix ();
 
-    drawLine ( dc, t, xMin, 0, 0, xMax, 0, 0, wxColor(255, 0, 0));
+    drawLine ( dc, t, xMin, 0, 0, xMax, 0, 0, wxColor(255, 0, 0), width, height);
 
-    t = fit_to_canvas * _Settings->GetYRotMatrix();
-    drawLine ( dc, t, 0, yMin, 0, 0, yMax, 0, wxColor(0, 255, 0));
+    t = _Settings->GetYRotMatrix();
+    drawLine ( dc, t, 0, yMin, 0, 0, yMax, 0, wxColor(0, 255, 0), width, height);
 
-    t = fit_to_canvas * _Settings->GetZRotMatrix();
-    drawLine ( dc, t, 0, 0, zMin, 0, 0, zMax, wxColor(0, 0, 255));
+    t = _Settings->GetZRotMatrix();
+    drawLine ( dc, t, 0, 0, zMin, 0, 0, zMax, wxColor(0, 0, 255), width, height);
 }
 
 void CoordinateSystem::drawArrow ( wxDC* dc, const double& x, const double& y, const double& z ) const
@@ -168,35 +164,55 @@ void CoordinateSystem::drawVectorField ( wxDC* dc, const double& width, const do
     // }
 }
 
-Projection CoordinateSystem::project ( const double& x, const double& y, const double& z, const double& focalLength ) const
+Projection CoordinateSystem::project ( const double& x, const double& y, const double& z, const double& width, const double& height, const double& focalLength ) const
 {
-    Projection projection;
-    Matrix rot(4, 4);
-    Matrix to2D(4, 4);
+    Projection projection = {};
+    Matrix proj(4, 4);
+    Vector4D input(x, y, z);
 
-    to2D.set(0, 0, 1.0);
-    to2D.set(1, 1, 1.0);
-    to2D.set(2, 2, 0.0);
-    to2D.set(3, 3, 1.0);
+    double n = width/2.0;
+    double f = width;
+    double l = 0;
+    double r = width;
+    double t = 0;
+    double b = height;    
 
-    Vector4D base(x, y, z);
-    Vector4D newBase(rot.rotateX(0.61) * rot.rotateY(3.14159 / 4.0) * base);
-    Vector4D base2D(to2D * newBase);
+    proj.set(0, 0, 2 * n / (r - l));
+    proj.set(1, 1, 2 * n / (t - b));
+    proj.set(0, 2, (r + l) / (r - l));
+    proj.set(1, 2, (t + b) / (t - b));
+    proj.set(2, 3, -2 * f * n / (f - n));
+    proj.set(2, 2, -(f + n) / (f - n));
+    proj.set(3, 2, -1.0);
 
-    projection.x = base2D.getX();
-    projection.y = base2D.getY();
+    Vector4D transformedPos(proj * input);
+
+    projection.x = transformedPos.getX();
+    projection.y = transformedPos.getY();
     return projection;
 }
 
 void CoordinateSystem::drawLine ( wxDC* dc, const Matrix& t, const double& x1, const double& y1, const double& z1,
-                                  const double& x2, const double& y2, const double& z2, const wxColor& color) const
+                                  const double& x2, const double& y2, const double& z2, const wxColor& color, const double& width, const double& height) const
 {
     dc->SetPen(wxPen(color));
     Vector4D v1 ( x1, y1, z1 );
     Vector4D v2 ( x2, y2, z2 );
+    Matrix transform(4, 4), scale(4,4);
+
+    transform = transform.translate(width/96.0, -width/96.0, 0);
+    scale.set(0, 0, width / 16.0);
+    scale.set(1, 1, width / 16.0);
+    scale.set(2, 2, width / 16.0);
+    scale.set(3, 3, 1.0);
+
+    transform = scale * transform;
     v1 = t * v1;
     v2 = t * v2;
-    auto p1 = project ( v1.getX (), v1.getY (), v1.getZ () );
-    auto p2 = project ( v2.getX (), v2.getY (), v2.getZ () );
+    v1 = transform * v1;
+    v2 = transform * v2;
+
+    auto p1 = project ( v1.getX (), v1.getY (), v1.getZ (), width, height );
+    auto p2 = project ( v2.getX (), v2.getY (), v2.getZ () , width, height);
     dc->DrawLine ( p1.x, p1.y, p2.x, p2.y );
 }
