@@ -1,7 +1,7 @@
 #include "MatrixOperations.h"
 
-Matrix::Matrix ( int rows, int cols )
-    : _Rows ( rows ), _Cols ( cols ), _Matrix ( rows* cols )
+Matrix::Matrix ( const int& rows, const int& cols )
+    : _Rows ( rows ), _Cols ( cols )
 {
     setZero ();
 }
@@ -28,14 +28,32 @@ int Matrix::getCols () const
     return _Cols;
 }
 
-double Matrix::get ( int row, int col ) const
+double Matrix::get ( const int& row, const int& col ) const
 {
-    return _Matrix[row * _Cols + col];
+    double result = 0.0;
+    try
+    {
+        result = _Matrix.at ( row * _Cols + col );
+    }
+    catch ( const std::out_of_range& e )
+    {
+        // to disable warning about unused variable
+        ( void ) e;
+        throw std::out_of_range ( "Matrix::get: row or col out of range" );
+    }
+    return result;
 }
 
-void Matrix::set ( int row, int col, double value )
+void Matrix::set ( const int& row, const int& col, const double& value )
 {
-    _Matrix[row * _Cols + col] = value;
+    try
+    {
+        _Matrix.at ( row * _Cols + col ) = value;
+    }
+    catch ( const std::out_of_range& e )
+    {
+        throw std::out_of_range ( "Matrix::set: row or col out of range" );
+    }
 }
 
 Matrix Matrix::operator+( const Matrix& other ) const
@@ -76,22 +94,12 @@ Matrix Matrix::operator*( const Matrix& other ) const
     return result;
 }
 
-Matrix Matrix::operator*( double scalar ) const
+Matrix Matrix::operator*( const double& scalar ) const
 {
     Matrix result ( _Rows, _Cols );
     for ( int i = 0; i < _Rows * _Cols; ++i )
     {
         result._Matrix[i] = _Matrix[i] * scalar;
-    }
-    return result;
-}
-
-Matrix Matrix::operator/( double scalar ) const
-{
-    Matrix result ( _Rows, _Cols );
-    for ( int i = 0; i < _Rows * _Cols; ++i )
-    {
-        result._Matrix[i] = _Matrix[i] / scalar;
     }
     return result;
 }
@@ -109,88 +117,15 @@ Matrix Matrix::transpose () const
     return result;
 }
 
-Matrix Matrix::translate(const double& x, const double& y, const double& z) const 
-{ 
-    Matrix translation(4, 4);
-    
-    translation.set(0, 0, 1.0);
-    translation.set(1, 1, 1.0);
-    translation.set(2, 2, 1.0);
-    translation.set(3, 3, 1.0);
-    
-    translation.set(0, 3, x);
-    translation.set(1, 3, y);
-    translation.set(2, 3, z);
-
-    return translation;
-}
-
-Matrix Matrix::scale(const double& x, const double& y, const double& z) const 
-{
-    Matrix scaling(4, 4);
-
-    scaling.set(0, 0, x);
-    scaling.set(1, 1, y);
-    scaling.set(2, 2, z);
-    scaling.set(3, 3, 1.0);
-
-    return scaling;
-}
-
-Matrix Matrix::rotateX(double rotation) const
-{
-    rotation = (rotation * 3.14159) / 180.0;
-    Matrix rot(4, 4);
- 
-    rot.set(0, 0, 1.0);
-    rot.set(1, 1, cos(rotation));
-    rot.set(2, 2, cos(rotation));
-    rot.set(1, 2, -sin(rotation));
-    rot.set(2, 1, sin(rotation));
-    rot.set(3, 3, 1.0);
-
-    return rot;
-}
-
-Matrix Matrix::rotateY(double rotation) const
-{
-    rotation = (rotation * 3.14159) / 180.0;
-    Matrix rot(4, 4);
-
-    rot.set(0, 0, cos(rotation));
-    rot.set(1, 1, 1.0);
-    rot.set(2, 2, cos(rotation));
-    rot.set(2, 0, -sin(rotation));
-    rot.set(0, 2, sin(rotation));
-    rot.set(3, 3, 1.0);
-
-    return rot;
-}
-
-Matrix Matrix::rotateZ(double rotation) const
-{
-    rotation = (rotation * 3.14159) / 180.0;
-    Matrix rot(4, 4);
-
-    rot.set(0, 0, cos(rotation));
-    rot.set(1, 1, cos(rotation));
-    rot.set(2, 2, 1.0);
-    rot.set(0, 1, -sin(rotation));
-    rot.set(1, 0, sin(rotation));
-    rot.set(3, 3, 1.0);
-
-    return rot;
-}
-
 void Matrix::setZero ()
 {
     for ( int i = 0; i < _Rows * _Cols; ++i )
     {
-        _Matrix[i] = 0.0;
+        _Matrix.emplace_back(0.0);
     }
 }
 
-Matrix Matrix::identity ( int size )
+Matrix Matrix::identity ( const int& size )
 {
     Matrix result ( size, size );
     for ( int i = 0; i < size; ++i )
@@ -202,37 +137,35 @@ Matrix Matrix::identity ( int size )
 
 Vector4D::Vector4D ()
 {
-    _Vector.emplace_back(0.0);
-    _Vector.emplace_back(0.0);
-    _Vector.emplace_back(0.0);
-    _Vector.emplace_back(1.0);
+    _Vector.emplace_back ( 0.0 );
+    _Vector.emplace_back ( 0.0 );
+    _Vector.emplace_back ( 0.0 );
+    _Vector.emplace_back ( 1.0 );
 }
 
 Vector4D::Vector4D ( const double& x, const double& y, const double& z )
 {
-    _Vector.emplace_back(x);
-    _Vector.emplace_back(y);
-    _Vector.emplace_back(z);
-    _Vector.emplace_back(1.0);
+    _Vector.emplace_back ( x );
+    _Vector.emplace_back ( y );
+    _Vector.emplace_back ( z );
+    _Vector.emplace_back ( 1.0 );
 }
 
 Vector4D::Vector4D ( const Vector4D& other )
 {
-    _Vector.reserve ( 4 );
-    setX ( other.getX () );
-    setY ( other.getY () );
-    setZ ( other.getZ () );
-    _Vector[3] = 1.0;
+    _Vector.at ( 0 ) = other._Vector.at ( 0 );
+    _Vector.at ( 1 ) = other._Vector.at ( 1 );
+    _Vector.at ( 2 ) = other._Vector.at ( 2 );
+    _Vector.at ( 3 ) = other._Vector.at ( 3 );
 }
 
-Vector4D& Vector4D::operator=(const Vector4D& other)
+Vector4D& Vector4D::operator=( const Vector4D& other )
 {
-    _Vector.reserve(4);
-    setX ( other.getX () );
-	setY ( other.getY () );
-	setZ ( other.getZ () );
-	_Vector[3] = 1.0;
-	return *this;
+    _Vector.at ( 0 ) = other._Vector.at ( 0 );
+    _Vector.at ( 1 ) = other._Vector.at ( 1 );
+    _Vector.at ( 2 ) = other._Vector.at ( 2 );
+    _Vector.at ( 3 ) = other._Vector.at ( 3 );
+    return *this;
 }
 
 double Vector4D::getX () const
@@ -278,23 +211,19 @@ void Vector4D::setW ( const double& w )
 Vector4D Vector4D::operator*( const double& scalar ) const
 {
     Vector4D result;
-    result.setX ( getX () * scalar );
-    result.setY ( getY () * scalar );
-    result.setZ ( getZ () * scalar );
-    return result;
-}
-
-Vector4D Vector4D::operator/( const double& scalar ) const
-{
-    Vector4D result;
-    result.setX ( getX () / scalar );
-    result.setY ( getY () / scalar );
-    result.setZ ( getZ () / scalar );
+    result._Vector.at ( 0 ) = _Vector.at ( 0 ) * scalar;
+    result._Vector.at ( 1 ) = _Vector.at ( 1 ) * scalar;
+    result._Vector.at ( 2 ) = _Vector.at ( 2 ) * scalar;
+    result._Vector.at ( 3 ) = _Vector.at ( 3 ) * scalar;
     return result;
 }
 
 Vector4D operator* ( const Matrix& mat, const Vector4D& vec )
 {
+    if ( mat.getCols () != 4 )
+    {
+        throw std::invalid_argument ( "Matrix::operator*: mat.getCols() != 4" );
+    }
     Vector4D result;
     result.setX ( mat.get ( 0, 0 ) * vec.getX () + mat.get ( 0, 1 ) * vec.getY () + mat.get ( 0, 2 ) * vec.getZ () + mat.get ( 0, 3 ) * vec.getW () );
     result.setY ( mat.get ( 1, 0 ) * vec.getX () + mat.get ( 1, 1 ) * vec.getY () + mat.get ( 1, 2 ) * vec.getZ () + mat.get ( 1, 3 ) * vec.getW () );

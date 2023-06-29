@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <stdexcept>
 
 class Vector4D {
     public:
@@ -21,42 +22,32 @@ class Vector4D {
     void setW ( const double& w );
 
     Vector4D operator*( const double& scalar ) const;
-    Vector4D operator/( const double& scalar ) const;
     private:
     std::vector<double> _Vector;
 };
 
 class Matrix {
     public:
-    Matrix ( int rows, int cols );
+    Matrix(const int& rows, const int& cols);
     Matrix ( const Matrix& other );
     Matrix& operator=( const Matrix& other );
     ~Matrix () = default;
 
     int getRows () const;
     int getCols () const;
-    double get ( int row, int col ) const;
-    void set ( int row, int col, double value );
+    double get ( const int& row, const int& col ) const;
+    void set (const int& row, const int& col, const double& value );
 
     Matrix operator+( const Matrix& other ) const;
     Matrix operator-( const Matrix& other ) const;
     Matrix operator*( const Matrix& other ) const;
-    Matrix operator*( double scalar ) const;
-    Matrix operator/( double scalar ) const;
+    Matrix operator*( const double& scalar ) const;
 
     Matrix transpose () const;
 
-    // these functions return tranformation matrices based on given parameters
-    Matrix translate(const double &x, const double &y,const double &z) const;
-    Matrix scale(const double& x, const double& y, const double& z) const;
-    Matrix rotateX(double rotation) const;
-    Matrix rotateY(double rotation) const;
-    Matrix rotateZ(double rotation) const;
-
-
     void setZero ();
 
-    static Matrix identity ( int size );
+    static Matrix identity ( const int& size );
 
     friend Vector4D operator* ( const Matrix& mat, const Vector4D& vec );
     private:

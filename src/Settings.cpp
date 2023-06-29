@@ -137,10 +137,12 @@ int Settings::GetZScale () const
 {
 	return _zScale;
 }
-void Settings::SetArrowLength ( const double& len ) {
+void Settings::SetArrowLength ( const double& len )
+{
 	_arrowLen = len;
 }
-double Settings::GetArrowLength() const {
+double Settings::GetArrowLength () const
+{
 	return _arrowLen;
 }
 void Settings::SetAutoScale ( const bool& autoScale )
@@ -151,7 +153,7 @@ bool Settings::isAutoScaled () const
 {
 	return _isAutoScaled;
 }
-Matrix Settings::GetScaleMatrix () const
+Matrix Settings::GetArrowScaleMatrix () const
 {
 	Matrix scale ( 4, 4 );
 	scale.set ( 0, 0, _xScale );
@@ -159,6 +161,16 @@ Matrix Settings::GetScaleMatrix () const
 	scale.set ( 2, 2, _zScale );
 	scale.set ( 3, 3, 1.0 );
 	return scale;
+}
+
+Matrix Settings::GetScaleMatrix ( const double& sx, const double& sy, const double& sz ) const
+{
+	Matrix matrix ( 4, 4 );
+	matrix.set ( 0, 0, sx );
+	matrix.set ( 1, 1, sy );
+	matrix.set ( 2, 2, sz );
+	matrix.set ( 3, 3, 1.0 );
+	return matrix;
 }
 
 void Settings::SetXRot ( const double& x )
@@ -188,35 +200,32 @@ double Settings::GetZRot () const
 Matrix Settings::GetXRotMatrix () const
 {
 	Matrix xRot ( 4, 4 );
-	double rot = (_xRot * 3.14159) / 180.0;
 	xRot.set ( 0, 0, 1.0 );
-	xRot.set ( 1, 1, cos ( rot ) );
-	xRot.set ( 1, 2, -sin ( rot ) );
-	xRot.set ( 2, 1, sin ( rot ) );
-	xRot.set ( 2, 2, cos ( rot ) );
+	xRot.set ( 1, 1, cos ( _xRot ) );
+	xRot.set ( 1, 2, -sin ( _xRot ) );
+	xRot.set ( 2, 1, sin ( _xRot ) );
+	xRot.set ( 2, 2, cos ( _xRot ) );
 	xRot.set ( 3, 3, 1.0 );
 	return xRot;
 }
 Matrix Settings::GetYRotMatrix () const
 {
 	Matrix yRot ( 4, 4 );
-	double rot = (_yRot * 3.14159) / 180.0;
-	yRot.set ( 0, 0, cos ( rot ) );
-	yRot.set ( 0, 2, sin ( rot ) );
+	yRot.set ( 0, 0, cos ( _yRot ) );
+	yRot.set ( 0, 2, sin ( _yRot ) );
 	yRot.set ( 1, 1, 1.0 );
-	yRot.set ( 2, 0, -sin ( rot ) );
-	yRot.set ( 2, 2, cos ( rot ) );
+	yRot.set ( 2, 0, -sin ( _yRot ) );
+	yRot.set ( 2, 2, cos ( _yRot ) );
 	yRot.set ( 3, 3, 1.0 );
 	return yRot;
 }
 Matrix Settings::GetZRotMatrix () const
 {
 	Matrix zRot ( 4, 4 );
-	double rot = (_zRot * 3.14159) / 180.0;
-	zRot.set ( 0, 0, cos ( rot ) );
-	zRot.set ( 0, 1, -sin ( rot ) );
-	zRot.set ( 1, 0, sin ( rot ) );
-	zRot.set ( 1, 1, cos ( rot ) );
+	zRot.set ( 0, 0, cos ( _zRot ) );
+	zRot.set ( 0, 1, -sin ( _zRot ) );
+	zRot.set ( 1, 0, sin ( _zRot ) );
+	zRot.set ( 1, 1, cos ( _zRot ) );
 	zRot.set ( 2, 2, 1.0 );
 	zRot.set ( 3, 3, 1.0 );
 	return zRot;
@@ -256,46 +265,46 @@ double Settings::GetZSurface () const
 	return _zSurface;
 }
 
-double Settings::Calc(const int type, const double x) const 
+double Settings::Calc ( const int type, const double x ) const
 {
 	double param;
 	funType fun;
-	if (type == 0)
+	if ( type == 0 )
 	{
 		param = _a;
-		fun = GetXFun();
+		fun = GetXFun ();
 	}
-	else if (type == 1)
+	else if ( type == 1 )
 	{
 		param = _b;
-		fun = GetYFun();
+		fun = GetYFun ();
 	}
-	else if (type == 2)
+	else if ( type == 2 )
 	{
 		param = _c;
-		fun = GetZFun();
+		fun = GetZFun ();
 	}
 	else return 0;
-	switch (fun)
+	switch ( fun )
 	{
 		case A:
 			return param;
 		case AX:
 			return param * x;
 		case AX2:
-			return param * pow(x, 2);
+			return param * pow ( x, 2 );
 		case AX3:
-			return param * pow(x, 3);
+			return param * pow ( x, 3 );
 		case LOG_AX:
-			if((param *x)>0)
-				return log(param * x);
+			if ( ( param * x ) > 0 )
+				return log ( param * x );
 			return 0;
 		case EXP_AX:
-			return exp(param * x);
+			return exp ( param * x );
 		case SIN_AX:
-			return sin(param * x);
+			return sin ( param * x );
 		case COS_AX:
-			return cos(param * x);
+			return cos ( param * x );
 		default:
 			return 0;
 	}
