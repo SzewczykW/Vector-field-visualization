@@ -30,7 +30,7 @@ class CoordinateSystem {
     void drawVectorField ( wxDC* dc, const double& width, const double& height ) const;
     void drawLine ( wxDC* dc, const Matrix& t, const double& x1, const double& y1, const double& z1,
                     const double& x2, const double& y2, const double& z2, const wxColor& color, const double& width, const double& height) const;
-    Projection project ( const double& x, const double& y, const double& z, const double& width, const double& height, const double& focalLength = 10.0 ) const;
+    Projection project ( const double& x, const double& y, const double& z, const double& width, const double& height, const Matrix& rotation ) const;
     private:
     /**
      * @brief Settings of the coordinate system.

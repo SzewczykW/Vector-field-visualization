@@ -164,13 +164,28 @@ void CoordinateSystem::drawVectorField ( wxDC* dc, const double& width, const do
     // }
 }
 
-Projection CoordinateSystem::project ( const double& x, const double& y, const double& z, const double& width, const double& height, const double& focalLength ) const
+Projection CoordinateSystem::project ( const double& x, const double& y, const double& z,
+                                    const double& width, const double& height, const Matrix& rotation) const
 {
     Projection projection = {};
     Matrix proj(4, 4);
     Vector4D input(x, y, z);
+    Matrix transform(4, 4), scale(4, 4);
 
-    double n = width/2.0;
+    //matrix to translate our coordinate system to center of screen
+    transform = transform.translate(width / 96.0, -width / 96.0, 0);
+
+    //scaling coord system so it would be readable
+    scale.set(0, 0, width / 16.0);
+    scale.set(1, 1, width / 16.0);
+    scale.set(2, 2, width / 16.0);
+    scale.set(3, 3, 1.0);
+    
+    //values were choosen using trail and error method probably could be done better
+    transform = scale * transform;
+
+    //projection matrix parameters
+    double n = width / 2.0; //literally dont know why this works, changing 2 to bigger number enlengthens z-axis and placement so its really sensitive
     double f = width;
     double l = 0;
     double r = width;
@@ -185,7 +200,8 @@ Projection CoordinateSystem::project ( const double& x, const double& y, const d
     proj.set(2, 2, -(f + n) / (f - n));
     proj.set(3, 2, -1.0);
 
-    Vector4D transformedPos(proj * input);
+    //rotation doesnt work yet 
+    Vector4D transformedPos(rotation * proj * transform * input);
 
     projection.x = transformedPos.getX();
     projection.y = transformedPos.getY();
@@ -193,26 +209,15 @@ Projection CoordinateSystem::project ( const double& x, const double& y, const d
 }
 
 void CoordinateSystem::drawLine ( wxDC* dc, const Matrix& t, const double& x1, const double& y1, const double& z1,
-                                  const double& x2, const double& y2, const double& z2, const wxColor& color, const double& width, const double& height) const
+                                  const double& x2, const double& y2, const double& z2, const wxColor& color, 
+                                  const double& width, const double& height) const
 {
     dc->SetPen(wxPen(color));
     Vector4D v1 ( x1, y1, z1 );
     Vector4D v2 ( x2, y2, z2 );
-    Matrix transform(4, 4), scale(4,4);
 
-    transform = transform.translate(width/96.0, -width/96.0, 0);
-    scale.set(0, 0, width / 16.0);
-    scale.set(1, 1, width / 16.0);
-    scale.set(2, 2, width / 16.0);
-    scale.set(3, 3, 1.0);
+    auto p1 = project ( v1.getX (), v1.getY (), v1.getZ (), width, height, t );
+    auto p2 = project ( v2.getX (), v2.getY (), v2.getZ () , width, height, t);
 
-    transform = scale * transform;
-    v1 = t * v1;
-    v2 = t * v2;
-    v1 = transform * v1;
-    v2 = transform * v2;
-
-    auto p1 = project ( v1.getX (), v1.getY (), v1.getZ (), width, height );
-    auto p2 = project ( v2.getX (), v2.getY (), v2.getZ () , width, height);
     dc->DrawLine ( p1.x, p1.y, p2.x, p2.y );
 }
