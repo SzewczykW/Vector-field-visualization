@@ -334,10 +334,9 @@ void GUIMyFrame1::Repaint ()
     wxClientDC dc1 (MainPanel);
     _bitmapBuffer = wxBitmap(MainPanel->GetSize());
     wxBufferedDC dc(&dc1, _bitmapBuffer);
-    //wxClientDC dc1 ( MainPanel );
-    //wxBufferedDC dc ( &dc1 );
+
     double height = MainPanel->GetSize ().GetHeight ();
     double width = MainPanel->GetSize ().GetWidth ();
+
     _CoordinateSystem->draw ( &dc, width, height );
-    //_bitmapBuffer->Blit(wxCoord(0), wxCoord(0), width, height, &dc, wxCoord(0), wxCoord(0);
 }
