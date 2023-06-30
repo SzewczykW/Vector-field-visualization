@@ -30,7 +30,7 @@ MyFrame1::MyFrame1( wxWindow* parent, wxWindowID id, const wxString& title, cons
 	wxBoxSizer* bSizer3;
 	bSizer3 = new wxBoxSizer( wxVERTICAL );
 
-	m_staticText1 = new wxStaticText( this, wxID_ANY, wxT("Function: V(x,y,z) = Pi+Qj+Rk"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText1 = new wxStaticText( this, wxID_ANY, wxT("V(x,y,z) = Pi+Qj+Rk"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText1->Wrap( -1 );
 	bSizer3->Add( m_staticText1, 0, wxALIGN_CENTER_HORIZONTAL|wxALL, 5 );
 
@@ -119,7 +119,7 @@ MyFrame1::MyFrame1( wxWindow* parent, wxWindowID id, const wxString& title, cons
 	info_staticText->Wrap( -1 );
 	bSizer3->Add( info_staticText, 0, wxALIGN_CENTER_HORIZONTAL|wxALL, 5 );
 
-	m_staticText26 = new wxStaticText( this, wxID_ANY, wxT("Axis Scale:"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText26 = new wxStaticText( this, wxID_ANY, wxT("Number Of Nodes:"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText26->Wrap( -1 );
 	bSizer3->Add( m_staticText26, 0, wxALIGN_CENTER_HORIZONTAL|wxALL, 5 );
 
