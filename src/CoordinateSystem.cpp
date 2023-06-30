@@ -129,7 +129,7 @@ void CoordinateSystem::drawVectorField ( wxDC* dc, const double& width, const do
                 double f = (xMax - xMin) / 10.0;
                 double x1 = xMin + i * f;
                 double x2 = _Settings->Calc(0, x1);
-                drawLine(dc, _Settings->GetXRotMatrix(), x1, y1, z1, x2, y2, z2, wxColor(0, 0, 0), width, height);
+                drawLine(dc, _Settings->GetXRotMatrix()* _Settings->GetYRotMatrix()* _Settings->GetZRotMatrix(), x1, y1, z1, x2, y2, z2, wxColor(0, 0, 0), width, height);
             }
         }
     }
@@ -195,7 +195,7 @@ Projection CoordinateSystem::project ( const double& x, const double& y, const d
     Matrix transform(4, 4), scale(4, 4);
 
     //matrix to translate our coordinate system to center of screen
-    transform = transform.translate(width / 128.0, -width / 128.0, 0);
+    transform = transform.translate(width / 3.0, -width / 3.0, 0);
 
     //scaling coord system so it would be readable
     scale.set(0, 0, width / 16.0);
@@ -204,7 +204,7 @@ Projection CoordinateSystem::project ( const double& x, const double& y, const d
     scale.set(3, 3, 1.0);
     
     //values were choosen using trail and error method probably could be done better
-    transform = scale * transform;
+    transform = transform * rotation * scale;
 
     //projection matrix parameters
     double n = width / 1.5; //literally dont know why this works, changing divider enlengthens/shortens z-axis and placement so its really sensitive
@@ -223,7 +223,7 @@ Projection CoordinateSystem::project ( const double& x, const double& y, const d
     proj.set(3, 2, -1.0);
 
     //rotation doesnt work yet 
-    Vector4D transformedPos(rotation * proj * transform * input);
+    Vector4D transformedPos(proj * transform * input);
 
     projection.x = transformedPos.getX();
     projection.y = transformedPos.getY();
