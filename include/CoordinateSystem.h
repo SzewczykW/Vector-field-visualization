@@ -17,6 +17,11 @@ struct Projection {
     double y;
 };
 
+struct Line {
+    Projection start;
+    Projection end;
+};
+
 class CoordinateSystem {
     public:
     CoordinateSystem ();
@@ -28,7 +33,7 @@ class CoordinateSystem {
     void drawArrow ( wxDC* dc, const double& x, const double& y, const double& z ) const;
     void drawSurface ( wxDC* dc, const double& width, const double& height ) const;
     void drawVectorField ( wxDC* dc, const double& width, const double& height ) const;
-    void drawLine ( wxDC* dc, const double& x1, const double& y1, const double& z1,
+    Line drawLine ( wxDC* dc, const double& x1, const double& y1, const double& z1,
                     const double& x2, const double& y2, const double& z2, const wxColor& color, const double& width, const double& height ) const;
     Projection project ( const double& x, const double& y, const double& z, const double& width, const double& heigh ) const;
     private:
