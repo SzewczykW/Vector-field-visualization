@@ -48,7 +48,8 @@ class Settings {
 	bool isAutoScaled () const;
 	void SetArrowLength ( const double& len );
 	double GetArrowLength () const;
-	Matrix GetScaleMatrix () const;
+	Matrix GetArrowScaleMatrix () const;
+	Matrix GetScaleMatrix ( const double& sx, const double& sy, const double& sz ) const;
 
 	void SetXRot ( const double& x );
 	void SetYRot ( const double& y );

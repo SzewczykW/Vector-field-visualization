@@ -233,22 +233,25 @@ void GUIMyFrame1::AutoLenOnCheckBox ( wxCommandEvent& event )
 
 void GUIMyFrame1::XRotOnScroll ( wxScrollEvent& event )
 {
-    _CoordinateSystem->getSettings ()->SetXRot ( XRot->GetThumbPosition () );
-    xRot_staticText->SetLabel ( wxString::Format ( wxT ( "%d" ), XRot->GetThumbPosition () ) );
+    auto rot = XRot->GetThumbPosition ();
+    _CoordinateSystem->getSettings ()->SetXRot ( rot * M_PI / 180.0 );
+    xRot_staticText->SetLabel ( wxString::Format ( wxT ( "%d" ), rot ) );
     Repaint ();
 }
 
 void GUIMyFrame1::YRotOnScroll ( wxScrollEvent& event )
 {
-    _CoordinateSystem->getSettings ()->SetYRot ( YRot->GetThumbPosition () );
-    yRot_staticText->SetLabel ( wxString::Format ( wxT ( "%d" ), YRot->GetThumbPosition () ) );
+    auto rot = YRot->GetThumbPosition ();
+    _CoordinateSystem->getSettings ()->SetYRot ( rot * M_PI / 180.0 );
+    yRot_staticText->SetLabel ( wxString::Format ( wxT ( "%d" ), rot ) );
     Repaint ();
 }
 
 void GUIMyFrame1::ZRotOnScroll ( wxScrollEvent& event )
 {
-    _CoordinateSystem->getSettings ()->SetZRot ( ZRot->GetThumbPosition () );
-    zRot_staticText->SetLabel ( wxString::Format ( wxT ( "%d" ), ZRot->GetThumbPosition () ) );
+    auto rot = ZRot->GetThumbPosition ();
+    _CoordinateSystem->getSettings ()->SetZRot ( rot * M_PI / 180.0 );
+    zRot_staticText->SetLabel ( wxString::Format ( wxT ( "%d" ), rot ) );
     Repaint ();
 }
 
