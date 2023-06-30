@@ -115,6 +115,10 @@ MyFrame1::MyFrame1( wxWindow* parent, wxWindowID id, const wxString& title, cons
 
 	bSizer3->Add( bSizer8, 1, wxEXPAND, 5 );
 
+	info_staticText = new wxStaticText( this, wxID_ANY, wxT("-10 < a, b, c < 10"), wxDefaultPosition, wxDefaultSize, 0 );
+	info_staticText->Wrap( -1 );
+	bSizer3->Add( info_staticText, 0, wxALIGN_CENTER_HORIZONTAL|wxALL, 5 );
+
 	m_staticText26 = new wxStaticText( this, wxID_ANY, wxT("Axis Scale:"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText26->Wrap( -1 );
 	bSizer3->Add( m_staticText26, 0, wxALIGN_CENTER_HORIZONTAL|wxALL, 5 );
@@ -128,14 +132,14 @@ MyFrame1::MyFrame1( wxWindow* parent, wxWindowID id, const wxString& title, cons
 
 	bSizer22->Add( m_staticText27, 0, wxALL, 5 );
 
-	m_staticText33 = new wxStaticText( this, wxID_ANY, wxT("10"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText33 = new wxStaticText( this, wxID_ANY, wxT("1"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText33->Wrap( -1 );
 	bSizer22->Add( m_staticText33, 0, wxALL, 5 );
 
 	XScale = new wxScrollBar( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxSB_HORIZONTAL );
 	bSizer22->Add( XScale, 1, wxALL, 5 );
 
-	m_staticText28 = new wxStaticText( this, wxID_ANY, wxT("100"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText28 = new wxStaticText( this, wxID_ANY, wxT("25"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText28->Wrap( -1 );
 	bSizer22->Add( m_staticText28, 0, wxALL, 5 );
 
@@ -155,14 +159,14 @@ MyFrame1::MyFrame1( wxWindow* parent, wxWindowID id, const wxString& title, cons
 
 	bSizer7->Add( m_staticText29, 0, wxALL, 5 );
 
-	m_staticText34 = new wxStaticText( this, wxID_ANY, wxT("10"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText34 = new wxStaticText( this, wxID_ANY, wxT("1"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText34->Wrap( -1 );
 	bSizer7->Add( m_staticText34, 0, wxALL, 5 );
 
 	YScale = new wxScrollBar( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxSB_HORIZONTAL );
 	bSizer7->Add( YScale, 1, wxALL, 5 );
 
-	m_staticText30 = new wxStaticText( this, wxID_ANY, wxT("100"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText30 = new wxStaticText( this, wxID_ANY, wxT("25"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText30->Wrap( -1 );
 	bSizer7->Add( m_staticText30, 0, wxALL, 5 );
 
@@ -182,14 +186,14 @@ MyFrame1::MyFrame1( wxWindow* parent, wxWindowID id, const wxString& title, cons
 
 	bSizer9->Add( m_staticText31, 0, wxALL, 5 );
 
-	m_staticText35 = new wxStaticText( this, wxID_ANY, wxT("10"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText35 = new wxStaticText( this, wxID_ANY, wxT("1"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText35->Wrap( -1 );
 	bSizer9->Add( m_staticText35, 0, wxALL, 5 );
 
 	ZScale = new wxScrollBar( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxSB_HORIZONTAL );
 	bSizer9->Add( ZScale, 1, wxALL, 5 );
 
-	m_staticText32 = new wxStaticText( this, wxID_ANY, wxT("100"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText32 = new wxStaticText( this, wxID_ANY, wxT("25"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText32->Wrap( -1 );
 	bSizer9->Add( m_staticText32, 0, wxALL, 5 );
 
@@ -200,7 +204,7 @@ MyFrame1::MyFrame1( wxWindow* parent, wxWindowID id, const wxString& title, cons
 
 	bSizer3->Add( bSizer9, 1, wxEXPAND, 5 );
 
-	m_staticText8 = new wxStaticText( this, wxID_ANY, wxT("Limits:"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText8 = new wxStaticText( this, wxID_ANY, wxT("Limits(x,y,z): <-5,5>"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText8->Wrap( -1 );
 	bSizer3->Add( m_staticText8, 0, wxALIGN_CENTER_HORIZONTAL|wxALL, 5 );
 

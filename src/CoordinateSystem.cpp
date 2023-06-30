@@ -175,10 +175,10 @@ Projection CoordinateSystem::project ( const double& x, const double& y, const d
 
     //matrix to translate our coordinate system to center of screen
 
-    auto translation = _Settings->GetTranslationMatrix(256 * width, -height * 192, 0.0);
+    auto translation = _Settings->GetTranslationMatrix(256 * width, -height * 192, 256 * width);
 
     // OLD:
-    //auto translation = _Settings->GetTranslationMatrix(width/1.5, -height/2.0, 0.0);
+    //auto translation = _Settings->GetTranslationMatrix(width/16.0, height/16.0, 0.0);
 
     //rotation matrices
     auto rotationX = _Settings->GetXRotMatrix ();
@@ -226,7 +226,6 @@ Projection CoordinateSystem::project ( const double& x, const double& y, const d
     //projectionMatrix.set ( 3, 2, -1.0 );
 
     auto transformedPos = projectionMatrix * transform * input;
-
     projection.x = transformedPos.getX ();
     projection.y = transformedPos.getY ();
     return projection;
@@ -243,7 +242,7 @@ Line CoordinateSystem::drawLine ( wxDC* dc, const double& x1, const double& y1, 
     auto p1 = project ( v1.getX (), v1.getY (), v1.getZ (), width, height );
     auto p2 = project ( v2.getX (), v2.getY (), v2.getZ (), width, height );
     auto line = Line ( p1, p2 );
-
+ 
     dc->DrawLine ( p1.x, p1.y, p2.x, p2.y );
     return line;
 }

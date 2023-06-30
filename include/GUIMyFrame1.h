@@ -53,6 +53,8 @@ class GUIMyFrame1 : public MyFrame1
 		~GUIMyFrame1 ();
 	private:
 		CoordinateSystem* _CoordinateSystem;
+		wxImage _imageSave;
+		wxBitmap _bitmapBuffer;
 };
 
 #endif // __GUIMyFrame1__

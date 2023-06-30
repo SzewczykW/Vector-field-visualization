@@ -51,6 +51,7 @@ class MyFrame1 : public wxFrame
 		wxChoice* ZFun;
 		wxStaticText* m_staticText7;
 		wxTextCtrl* CParam;
+		wxStaticText* info_staticText;
 		wxStaticText* m_staticText26;
 		wxStaticText* m_staticText27;
 		wxStaticText* m_staticText33;

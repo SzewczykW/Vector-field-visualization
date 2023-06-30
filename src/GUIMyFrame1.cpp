@@ -4,17 +4,17 @@ GUIMyFrame1::GUIMyFrame1 ( wxWindow* parent )
     :
     MyFrame1 ( parent ), _CoordinateSystem ( new CoordinateSystem () )
 {
-    XScale->SetScrollbar ( 0, 1, 91, 1, true );
-    YScale->SetScrollbar ( 0, 1, 91, 1, true );
-    ZScale->SetScrollbar ( 0, 1, 91, 1, true );
+    XScale->SetScrollbar ( 1, 1, 26, 1, true );
+    YScale->SetScrollbar ( 1, 1, 26, 1, true );
+    ZScale->SetScrollbar ( 1, 1, 6, 1, true );
     XRot->SetScrollbar ( 0, 1, 360, 1, true );
     YRot->SetScrollbar ( 0, 1, 360, 1, true );
     ZRot->SetScrollbar ( 0, 1, 360, 1, true );
     ArrowScale->SetScrollbar ( 0, 1, 100, true ); //TO MOZNA BEDZIE ZMIENIC BO IDK W JAKIEJ SKALI BEDA STRZALKI
     ArrowScale->Disable ();
-    xScale_staticText->SetLabel ( wxString::Format ( wxT ( "%d" ), XScale->GetThumbPosition () + 10 ) );
-    yScale_staticText->SetLabel ( wxString::Format ( wxT ( "%d" ), YScale->GetThumbPosition () + 10 ) );
-    zScale_staticText->SetLabel ( wxString::Format ( wxT ( "%d" ), ZScale->GetThumbPosition () + 10 ) );
+    xScale_staticText->SetLabel ( wxString::Format ( wxT ( "%d" ), XScale->GetThumbPosition () ) );
+    yScale_staticText->SetLabel ( wxString::Format ( wxT ( "%d" ), YScale->GetThumbPosition () ) );
+    zScale_staticText->SetLabel ( wxString::Format ( wxT ( "%d" ), ZScale->GetThumbPosition () ) );
     xRot_staticText->SetLabel ( wxString::Format ( wxT ( "%d" ), XRot->GetThumbPosition () ) );
     yRot_staticText->SetLabel ( wxString::Format ( wxT ( "%d" ), YRot->GetThumbPosition () ) );
     zRot_staticText->SetLabel ( wxString::Format ( wxT ( "%d" ), ZRot->GetThumbPosition () ) );
@@ -25,6 +25,7 @@ GUIMyFrame1::GUIMyFrame1 ( wxWindow* parent )
     y360_staticText->SetLabel ( _ ( "360\u00B0" ) );
     z0_staticText->SetLabel ( _ ( "0\u00B0" ) );
     z360_staticText->SetLabel ( _ ( "360\u00B0" ) );
+    info_staticText->SetLabel ( _ ( "-10 \u2264 a,b,c \u2264 10" ) ); //jak u ciebie sie nie bedzie wyswietlac poprawnie to trzeba bedzie zmienic na <=
 }
 
 GUIMyFrame1::~GUIMyFrame1 ()
@@ -104,21 +105,21 @@ void GUIMyFrame1::CParamOnText ( wxCommandEvent& event )
 
 void GUIMyFrame1::XScaleOnScroll ( wxScrollEvent& event )
 {
-    xScale_staticText->SetLabel ( wxString::Format ( wxT ( "%d" ), XScale->GetThumbPosition () + 10 ) );
+    xScale_staticText->SetLabel ( wxString::Format ( wxT ( "%d" ), XScale->GetThumbPosition () ) );
     _CoordinateSystem->getSettings ()->SetXScale ( XScale->GetThumbPosition () );
     Repaint ();
 }
 
 void GUIMyFrame1::YScaleOnScroll ( wxScrollEvent& event )
 {
-    yScale_staticText->SetLabel ( wxString::Format ( wxT ( "%d" ), YScale->GetThumbPosition () + 10 ) );
+    yScale_staticText->SetLabel ( wxString::Format ( wxT ( "%d" ), YScale->GetThumbPosition () ) );
     _CoordinateSystem->getSettings ()->SetYScale ( YScale->GetThumbPosition () );
     Repaint ();
 }
 
 void GUIMyFrame1::ZScaleOnScroll ( wxScrollEvent& event )
 {
-    zScale_staticText->SetLabel ( wxString::Format ( wxT ( "%d" ), ZScale->GetThumbPosition () + 10 ) );
+    zScale_staticText->SetLabel ( wxString::Format ( wxT ( "%d" ), ZScale->GetThumbPosition () ) );
     _CoordinateSystem->getSettings ()->SetZScale ( ZScale->GetThumbPosition () );
     Repaint ();
 }
@@ -314,20 +315,29 @@ void GUIMyFrame1::ZSurfaceOnText ( wxCommandEvent& event )
 
 void GUIMyFrame1::SaveButtonOnButtonClick ( wxCommandEvent& event )
 {
-    wxFileDialog WxSaveFileDialog ( this, _ ( "Choose a file" ), _ ( "" ), _ ( "" ), _ ( "*.*" ), wxFD_SAVE );
+    wxFileDialog WxSaveFileDialog ( this, _ ( "Choose a file" ), _ ( "" ), _ ( "" ), _ ( "*.*" ), wxFD_SAVE | wxFD_OVERWRITE_PROMPT);
     WxSaveFileDialog.SetWildcard ( "JPEG files (*.jpg)|*.jpg|BMP files(*.bmp) | *.bmp |GIF files(*.gif) | *.gif|PNG files(*.png)|*.png " );
-    if ( WxSaveFileDialog.ShowModal () )
+    if (WxSaveFileDialog.ShowModal() == wxID_OK)
     {
-
+        _imageSave = _bitmapBuffer.ConvertToImage();
+        _imageSave.SetOption("quality", 100);
+        _imageSave.AddHandler(new wxJPEGHandler);
+        _imageSave.AddHandler(new wxGIFHandler);
+        _imageSave.AddHandler(new wxBMPHandler);
+        _imageSave.AddHandler(new wxPNGHandler);
+        _imageSave.SaveFile(WxSaveFileDialog.GetPath());
     }
 }
 
 void GUIMyFrame1::Repaint ()
 {
-    wxClientDC dc1 ( MainPanel );
-    wxBufferedDC dc ( &dc1 );
+    wxClientDC dc1 (MainPanel);
+    _bitmapBuffer = wxBitmap(MainPanel->GetSize());
+    wxBufferedDC dc(&dc1, _bitmapBuffer);
+    //wxClientDC dc1 ( MainPanel );
+    //wxBufferedDC dc ( &dc1 );
     double height = MainPanel->GetSize ().GetHeight ();
     double width = MainPanel->GetSize ().GetWidth ();
-
     _CoordinateSystem->draw ( &dc, width, height );
+    //_bitmapBuffer->Blit(wxCoord(0), wxCoord(0), width, height, &dc, wxCoord(0), wxCoord(0);
 }
