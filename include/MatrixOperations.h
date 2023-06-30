@@ -22,6 +22,7 @@ class Vector4D {
     void setW ( const double& w );
 
     Vector4D operator*( const double& scalar ) const;
+    Vector4D operator+( const Vector4D& other) const;
     private:
     std::vector<double> _Vector;
 };

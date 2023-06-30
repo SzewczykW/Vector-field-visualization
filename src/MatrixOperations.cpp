@@ -218,6 +218,18 @@ Vector4D Vector4D::operator*( const double& scalar ) const
     return result;
 }
 
+Vector4D Vector4D::operator+(const Vector4D& other) const
+{
+    Vector4D result;
+    
+    result._Vector.at(0) = _Vector.at(0) + other._Vector.at(0);
+    result._Vector.at(1) = _Vector.at(1) + other._Vector.at(1);
+    result._Vector.at(2) = _Vector.at(2) + other._Vector.at(2);
+    result._Vector.at(3) = _Vector.at(3) + other._Vector.at(3);
+    
+    return result;
+}
+
 Vector4D operator* ( const Matrix& mat, const Vector4D& vec )
 {
     if ( mat.getCols () != 4 )

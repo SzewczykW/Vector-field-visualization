@@ -30,7 +30,7 @@ class CoordinateSystem {
     Settings* getSettings ();
     void draw ( wxDC* dc, const double& width, const double& height ) const;
     void drawAxes ( wxDC* dc, const double& width, const double& height ) const;
-    void drawArrow ( wxDC* dc, const double& x, const double& y, const double& z ) const;
+    void drawArrow ( wxDC* dc, const double& x1, const double& y1, const double& z1, const double& x2, const double& y2, const double& z2,const double& width, const double& height) const;
     void drawSurface ( wxDC* dc, const double& width, const double& height ) const;
     void drawVectorField ( wxDC* dc, const double& width, const double& height ) const;
     Line drawLine ( wxDC* dc, const double& x1, const double& y1, const double& z1,
