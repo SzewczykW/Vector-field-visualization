@@ -38,7 +38,6 @@ class MyFrame1 : public wxFrame
 	private:
 
 	protected:
-		wxPanel* MainPanel;
 		wxStaticText* m_staticText1;
 		wxStaticText* m_staticText2;
 		wxChoice* XFun;
@@ -87,13 +86,19 @@ class MyFrame1 : public wxFrame
 		wxCheckBox* AutoLen;
 		wxStaticText* m_staticText17;
 		wxStaticText* m_staticText18;
+		wxStaticText* x0_staticText;
 		wxScrollBar* XRot;
+		wxStaticText* x360_staticText;
 		wxStaticText* xRot_staticText;
 		wxStaticText* m_staticText19;
+		wxStaticText* y0_staticText;
 		wxScrollBar* YRot;
+		wxStaticText* y360_staticText;
 		wxStaticText* yRot_staticText;
 		wxStaticText* m_staticText20;
+		wxStaticText* z0_staticText;
 		wxScrollBar* ZRot;
+		wxStaticText* z360_staticText;
 		wxStaticText* zRot_staticText;
 		wxCheckBox* AddSurface;
 		wxStaticText* m_staticText22;
@@ -135,8 +140,9 @@ class MyFrame1 : public wxFrame
 
 
 	public:
+		wxPanel* MainPanel;
 
-		MyFrame1( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Vector Field Visualisation"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 1000,800 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
+		MyFrame1( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Vector Field Visualisation"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 1280,800 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
 
 		~MyFrame1();
 

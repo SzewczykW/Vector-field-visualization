@@ -5,13 +5,13 @@
 // PLEASE DO *NOT* EDIT THIS FILE!
 ///////////////////////////////////////////////////////////////////////////
 
-#include"../include/GUI.h"
+#include "GUI.h"
 
 ///////////////////////////////////////////////////////////////////////////
 
 MyFrame1::MyFrame1( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxFrame( parent, id, title, pos, size, style )
 {
-	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
+	this->SetSizeHints( wxSize( 1280,800 ), wxDefaultSize );
 
 	wxBoxSizer* bSizer1;
 	bSizer1 = new wxBoxSizer( wxHORIZONTAL );
@@ -30,7 +30,7 @@ MyFrame1::MyFrame1( wxWindow* parent, wxWindowID id, const wxString& title, cons
 	wxBoxSizer* bSizer3;
 	bSizer3 = new wxBoxSizer( wxVERTICAL );
 
-	m_staticText1 = new wxStaticText( this, wxID_ANY, wxT("Function: V = Pi+Qj+Rk"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText1 = new wxStaticText( this, wxID_ANY, wxT("Function: V(x,y,z) = Pi+Qj+Rk"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText1->Wrap( -1 );
 	bSizer3->Add( m_staticText1, 0, wxALIGN_CENTER_HORIZONTAL|wxALL, 5 );
 
@@ -124,6 +124,8 @@ MyFrame1::MyFrame1( wxWindow* parent, wxWindowID id, const wxString& title, cons
 
 	m_staticText27 = new wxStaticText( this, wxID_ANY, wxT("x:"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText27->Wrap( -1 );
+	m_staticText27->SetForegroundColour( wxColour( 128, 0, 0 ) );
+
 	bSizer22->Add( m_staticText27, 0, wxALL, 5 );
 
 	m_staticText33 = new wxStaticText( this, wxID_ANY, wxT("10"), wxDefaultPosition, wxDefaultSize, 0 );
@@ -149,6 +151,8 @@ MyFrame1::MyFrame1( wxWindow* parent, wxWindowID id, const wxString& title, cons
 
 	m_staticText29 = new wxStaticText( this, wxID_ANY, wxT("y:"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText29->Wrap( -1 );
+	m_staticText29->SetForegroundColour( wxColour( 0, 128, 0 ) );
+
 	bSizer7->Add( m_staticText29, 0, wxALL, 5 );
 
 	m_staticText34 = new wxStaticText( this, wxID_ANY, wxT("10"), wxDefaultPosition, wxDefaultSize, 0 );
@@ -174,6 +178,8 @@ MyFrame1::MyFrame1( wxWindow* parent, wxWindowID id, const wxString& title, cons
 
 	m_staticText31 = new wxStaticText( this, wxID_ANY, wxT("z:"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText31->Wrap( -1 );
+	m_staticText31->SetForegroundColour( wxColour( 0, 0, 128 ) );
+
 	bSizer9->Add( m_staticText31, 0, wxALL, 5 );
 
 	m_staticText35 = new wxStaticText( this, wxID_ANY, wxT("10"), wxDefaultPosition, wxDefaultSize, 0 );
@@ -203,6 +209,8 @@ MyFrame1::MyFrame1( wxWindow* parent, wxWindowID id, const wxString& title, cons
 
 	m_staticText9 = new wxStaticText( this, wxID_ANY, wxT("x min:"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText9->Wrap( -1 );
+	m_staticText9->SetForegroundColour( wxColour( 128, 0, 0 ) );
+
 	bSizer10->Add( m_staticText9, 0, wxALL, 5 );
 
 	XMin = new wxTextCtrl( this, wxID_ANY, wxT("-5"), wxDefaultPosition, wxDefaultSize, 0 );
@@ -212,6 +220,8 @@ MyFrame1::MyFrame1( wxWindow* parent, wxWindowID id, const wxString& title, cons
 
 	m_staticText10 = new wxStaticText( this, wxID_ANY, wxT("x max:"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText10->Wrap( -1 );
+	m_staticText10->SetForegroundColour( wxColour( 128, 0, 0 ) );
+
 	bSizer10->Add( m_staticText10, 0, wxALL, 5 );
 
 	XMax = new wxTextCtrl( this, wxID_ANY, wxT("5"), wxDefaultPosition, wxDefaultSize, 0 );
@@ -227,6 +237,8 @@ MyFrame1::MyFrame1( wxWindow* parent, wxWindowID id, const wxString& title, cons
 
 	m_staticText11 = new wxStaticText( this, wxID_ANY, wxT("y min:"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText11->Wrap( -1 );
+	m_staticText11->SetForegroundColour( wxColour( 0, 128, 0 ) );
+
 	bSizer11->Add( m_staticText11, 0, wxALL, 5 );
 
 	YMin = new wxTextCtrl( this, wxID_ANY, wxT("-5"), wxDefaultPosition, wxDefaultSize, 0 );
@@ -236,6 +248,8 @@ MyFrame1::MyFrame1( wxWindow* parent, wxWindowID id, const wxString& title, cons
 
 	m_staticText12 = new wxStaticText( this, wxID_ANY, wxT("y max:"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText12->Wrap( -1 );
+	m_staticText12->SetForegroundColour( wxColour( 0, 128, 0 ) );
+
 	bSizer11->Add( m_staticText12, 0, wxALL, 5 );
 
 	YMax = new wxTextCtrl( this, wxID_ANY, wxT("5"), wxDefaultPosition, wxDefaultSize, 0 );
@@ -251,6 +265,8 @@ MyFrame1::MyFrame1( wxWindow* parent, wxWindowID id, const wxString& title, cons
 
 	m_staticText13 = new wxStaticText( this, wxID_ANY, wxT("z min:"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText13->Wrap( -1 );
+	m_staticText13->SetForegroundColour( wxColour( 0, 0, 128 ) );
+
 	bSizer12->Add( m_staticText13, 0, wxALL, 5 );
 
 	ZMin = new wxTextCtrl( this, wxID_ANY, wxT("-5"), wxDefaultPosition, wxDefaultSize, 0 );
@@ -260,6 +276,8 @@ MyFrame1::MyFrame1( wxWindow* parent, wxWindowID id, const wxString& title, cons
 
 	m_staticText14 = new wxStaticText( this, wxID_ANY, wxT("z max:"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText14->Wrap( -1 );
+	m_staticText14->SetForegroundColour( wxColour( 0, 0, 128 ) );
+
 	bSizer12->Add( m_staticText14, 0, wxALL, 5 );
 
 	ZMax = new wxTextCtrl( this, wxID_ANY, wxT("5"), wxDefaultPosition, wxDefaultSize, 0 );
@@ -300,10 +318,20 @@ MyFrame1::MyFrame1( wxWindow* parent, wxWindowID id, const wxString& title, cons
 
 	m_staticText18 = new wxStaticText( this, wxID_ANY, wxT("x:"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText18->Wrap( -1 );
+	m_staticText18->SetForegroundColour( wxColour( 128, 0, 0 ) );
+
 	bSizer14->Add( m_staticText18, 0, wxALL, 5 );
+
+	x0_staticText = new wxStaticText( this, wxID_ANY, wxT("MyLabel"), wxDefaultPosition, wxDefaultSize, 0 );
+	x0_staticText->Wrap( -1 );
+	bSizer14->Add( x0_staticText, 0, wxALL, 5 );
 
 	XRot = new wxScrollBar( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxSB_HORIZONTAL );
 	bSizer14->Add( XRot, 0, wxALL, 5 );
+
+	x360_staticText = new wxStaticText( this, wxID_ANY, wxT("MyLabel"), wxDefaultPosition, wxDefaultSize, 0 );
+	x360_staticText->Wrap( -1 );
+	bSizer14->Add( x360_staticText, 0, wxALL, 5 );
 
 	xRot_staticText = new wxStaticText( this, wxID_ANY, wxT("MyLabel"), wxDefaultPosition, wxDefaultSize, 0 );
 	xRot_staticText->Wrap( -1 );
@@ -317,10 +345,20 @@ MyFrame1::MyFrame1( wxWindow* parent, wxWindowID id, const wxString& title, cons
 
 	m_staticText19 = new wxStaticText( this, wxID_ANY, wxT("y:"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText19->Wrap( -1 );
+	m_staticText19->SetForegroundColour( wxColour( 0, 128, 0 ) );
+
 	bSizer17->Add( m_staticText19, 0, wxALL, 5 );
+
+	y0_staticText = new wxStaticText( this, wxID_ANY, wxT("MyLabel"), wxDefaultPosition, wxDefaultSize, 0 );
+	y0_staticText->Wrap( -1 );
+	bSizer17->Add( y0_staticText, 0, wxALL, 5 );
 
 	YRot = new wxScrollBar( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxSB_HORIZONTAL );
 	bSizer17->Add( YRot, 0, wxALL, 5 );
+
+	y360_staticText = new wxStaticText( this, wxID_ANY, wxT("MyLabel"), wxDefaultPosition, wxDefaultSize, 0 );
+	y360_staticText->Wrap( -1 );
+	bSizer17->Add( y360_staticText, 0, wxALL, 5 );
 
 	yRot_staticText = new wxStaticText( this, wxID_ANY, wxT("MyLabel"), wxDefaultPosition, wxDefaultSize, 0 );
 	yRot_staticText->Wrap( -1 );
@@ -334,10 +372,20 @@ MyFrame1::MyFrame1( wxWindow* parent, wxWindowID id, const wxString& title, cons
 
 	m_staticText20 = new wxStaticText( this, wxID_ANY, wxT("z:"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText20->Wrap( -1 );
+	m_staticText20->SetForegroundColour( wxColour( 0, 0, 128 ) );
+
 	bSizer18->Add( m_staticText20, 0, wxALL, 5 );
+
+	z0_staticText = new wxStaticText( this, wxID_ANY, wxT("MyLabel"), wxDefaultPosition, wxDefaultSize, 0 );
+	z0_staticText->Wrap( -1 );
+	bSizer18->Add( z0_staticText, 0, wxALL, 5 );
 
 	ZRot = new wxScrollBar( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxSB_HORIZONTAL );
 	bSizer18->Add( ZRot, 0, wxALL, 5 );
+
+	z360_staticText = new wxStaticText( this, wxID_ANY, wxT("MyLabel"), wxDefaultPosition, wxDefaultSize, 0 );
+	z360_staticText->Wrap( -1 );
+	bSizer18->Add( z360_staticText, 0, wxALL, 5 );
 
 	zRot_staticText = new wxStaticText( this, wxID_ANY, wxT("MyLabel"), wxDefaultPosition, wxDefaultSize, 0 );
 	zRot_staticText->Wrap( -1 );
@@ -354,6 +402,8 @@ MyFrame1::MyFrame1( wxWindow* parent, wxWindowID id, const wxString& title, cons
 
 	m_staticText22 = new wxStaticText( this, wxID_ANY, wxT("x:"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText22->Wrap( -1 );
+	m_staticText22->SetForegroundColour( wxColour( 128, 0, 0 ) );
+
 	bSizer19->Add( m_staticText22, 0, wxALL, 5 );
 
 	XSurface = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
@@ -363,6 +413,8 @@ MyFrame1::MyFrame1( wxWindow* parent, wxWindowID id, const wxString& title, cons
 
 	m_staticText23 = new wxStaticText( this, wxID_ANY, wxT("y:"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText23->Wrap( -1 );
+	m_staticText23->SetForegroundColour( wxColour( 0, 128, 0 ) );
+
 	bSizer19->Add( m_staticText23, 0, wxALL, 5 );
 
 	YSurface = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
@@ -372,6 +424,8 @@ MyFrame1::MyFrame1( wxWindow* parent, wxWindowID id, const wxString& title, cons
 
 	m_staticText24 = new wxStaticText( this, wxID_ANY, wxT("z:"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText24->Wrap( -1 );
+	m_staticText24->SetForegroundColour( wxColour( 0, 0, 128 ) );
+
 	bSizer19->Add( m_staticText24, 0, wxALL, 5 );
 
 	ZSurface = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
