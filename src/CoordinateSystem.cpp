@@ -29,6 +29,7 @@ CoordinateSystem::~CoordinateSystem ()
 {
     delete _Settings;
 }
+
 void CoordinateSystem::setSettings ( Settings* settings )
 {
     _Settings = settings;
@@ -65,7 +66,6 @@ void CoordinateSystem::drawAxes ( wxDC* dc, const double& width, const double& h
     auto yMax = _Settings->GetYMax ();
     auto zMin = _Settings->GetZMin ();
     auto zMax = _Settings->GetZMax ();
-
 
     auto lineX = drawLine ( dc, xMin, 0, 0, xMax, 0, 0, wxColor ( 255, 0, 0 ), width, height );
 
@@ -168,8 +168,8 @@ void CoordinateSystem::drawVectorField ( wxDC* dc, const double& width, const do
             }
         }
     }
-
 }
+
 
 void CoordinateSystem::drawArrow ( wxDC* dc, const double& x1, const double& y1, const double& z1, const double& x2,
                                    const double& y2, const double& z2, const double& width, const double& height ) const

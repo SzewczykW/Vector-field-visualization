@@ -541,6 +541,7 @@ MyFrame1::MyFrame1 ( wxWindow* parent, wxWindowID id, const wxString& title, con
 MyFrame1::~MyFrame1 ()
 {
 	// Disconnect Events
+<<<<<<< HEAD
 	MainPanel->Disconnect ( wxEVT_SIZE, wxSizeEventHandler ( MyFrame1::MainPanelOnSize ), NULL, this );
 	MainPanel->Disconnect ( wxEVT_UPDATE_UI, wxUpdateUIEventHandler ( MyFrame1::MainPanelRepaint ), NULL, this );
 	XFun->Disconnect ( wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler ( MyFrame1::XFunOnChoice ), NULL, this );
@@ -624,5 +625,4 @@ MyFrame1::~MyFrame1 ()
 	YSurface->Disconnect ( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler ( MyFrame1::YSurfaceOnText ), NULL, this );
 	ZSurface->Disconnect ( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler ( MyFrame1::ZSurfaceOnText ), NULL, this );
 	SaveButton->Disconnect ( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler ( MyFrame1::SaveButtonOnButtonClick ), NULL, this );
-
 }

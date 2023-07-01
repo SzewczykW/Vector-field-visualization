@@ -138,6 +138,7 @@ class MyFrame1 : public wxFrame {
 	virtual void ZSurfaceOnText ( wxCommandEvent& event ) { event.Skip (); }
 	virtual void SaveButtonOnButtonClick ( wxCommandEvent& event ) { event.Skip (); }
 
+	MyFrame1(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Vector Field Visualisation"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(1280, 800), long style = wxDEFAULT_FRAME_STYLE | wxTAB_TRAVERSAL);
 
 	public:
 	wxPanel* MainPanel;
@@ -147,4 +148,3 @@ class MyFrame1 : public wxFrame {
 	~MyFrame1 ();
 
 };
-
