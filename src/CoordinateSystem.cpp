@@ -175,7 +175,7 @@ Projection CoordinateSystem::project ( const double& x, const double& y, const d
 
     //matrix to translate our coordinate system to center of screen
 
-    auto translation = _Settings->GetTranslationMatrix(256 * width, -height * 192, 256 * width);
+    auto translation = _Settings->GetTranslationMatrix(256 * width, -height * 192, 1.0);
 
     // OLD:
     //auto translation = _Settings->GetTranslationMatrix(width/16.0, height/16.0, 0.0);
@@ -188,7 +188,8 @@ Projection CoordinateSystem::project ( const double& x, const double& y, const d
     //scaling coord system so it would be readable
     // OLD:
     //auto scale = _Settings->GetScaleMatrix(width/16.0, height/16.0, width/16.0);
-    auto scale = _Settings->GetScaleMatrix(width*20.0, height*20.0, width*20.0);
+
+    auto scale = _Settings->GetScaleMatrix(width * 20.0, height * 20.0, width * 20);
 
     //transformation matrix
     auto transform = translation * rotationX * rotationY * rotationZ * scale;
