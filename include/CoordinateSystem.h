@@ -38,9 +38,5 @@ class CoordinateSystem {
     Projection project ( const double& x, const double& y, const double& z, const double& width, const double& heigh ) const;
 
     private:
-    /**
-     * @brief Settings of the coordinate system.
-     *
-     */
     Settings* _Settings;
 };

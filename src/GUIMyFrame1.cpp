@@ -4,11 +4,11 @@ GUIMyFrame1::GUIMyFrame1 ( wxWindow* parent )
     :
     MyFrame1 ( parent ), _CoordinateSystem ( new CoordinateSystem () )
 {
-    XScale->SetScrollbar ( 1, 1, 26, 1, true );
-    YScale->SetScrollbar ( 1, 1, 26, 1, true );
-    ZScale->SetScrollbar ( 1, 1, 6, 1, true );
-    XRot->SetScrollbar ( 0, 1, 360, 1, true );
-    YRot->SetScrollbar ( 0, 1, 360, 1, true );
+    XScale->SetScrollbar ( 3, 1, 6, 1, true );
+    YScale->SetScrollbar ( 10, 1, 26, 1, true );
+    ZScale->SetScrollbar ( 10, 1, 26, 1, true );
+    XRot->SetScrollbar ( 15, 1, 360, 1, true );
+    YRot->SetScrollbar ( 15, 1, 360, 1, true );
     ZRot->SetScrollbar ( 0, 1, 360, 1, true );
     ArrowScale->SetScrollbar ( 0, 1, 100, true ); //TO MOZNA BEDZIE ZMIENIC BO IDK W JAKIEJ SKALI BEDA STRZALKI
     ArrowScale->Disable ();
@@ -25,7 +25,31 @@ GUIMyFrame1::GUIMyFrame1 ( wxWindow* parent )
     y360_staticText->SetLabel ( _ ( "360\u00B0" ) );
     z0_staticText->SetLabel ( _ ( "0\u00B0" ) );
     z360_staticText->SetLabel ( _ ( "360\u00B0" ) );
-    info_staticText->SetLabel ( _ ( "-10 \u2264 a,b,c \u2264 10" ) ); //jak u ciebie sie nie bedzie wyswietlac poprawnie to trzeba bedzie zmienic na <=
+
+    _CoordinateSystem->getSettings ()->SetXScale ( XScale->GetThumbPosition () );
+    _CoordinateSystem->getSettings ()->SetYScale ( YScale->GetThumbPosition () );
+    _CoordinateSystem->getSettings ()->SetZScale ( ZScale->GetThumbPosition () );
+    _CoordinateSystem->getSettings ()->SetXRot ( XRot->GetThumbPosition () );
+    _CoordinateSystem->getSettings ()->SetYRot ( YRot->GetThumbPosition () );
+    _CoordinateSystem->getSettings ()->SetZRot ( ZRot->GetThumbPosition () );
+    _CoordinateSystem->getSettings ()->SetXMin ( -5.0 );
+    _CoordinateSystem->getSettings ()->SetXMax ( 5.0 );
+    _CoordinateSystem->getSettings ()->SetYMin ( -5.0 );
+    _CoordinateSystem->getSettings ()->SetYMax ( 5.0 );
+    _CoordinateSystem->getSettings ()->SetZMin ( -5.0 );
+    _CoordinateSystem->getSettings ()->SetZMax ( 5.0 );
+    _CoordinateSystem->getSettings ()->SetA ( 1.0 );
+    _CoordinateSystem->getSettings ()->SetB ( 1.0 );
+    _CoordinateSystem->getSettings ()->SetC ( 1.0 );
+    _CoordinateSystem->getSettings ()->SetXFun ( funType::A );
+    _CoordinateSystem->getSettings ()->SetYFun ( funType::A );
+    _CoordinateSystem->getSettings ()->SetZFun ( funType::A );
+    _CoordinateSystem->getSettings ()->SetArrowLength ( ArrowScale->GetThumbPosition () );
+    _CoordinateSystem->getSettings ()->SetAutoScale ( true );
+    _CoordinateSystem->getSettings ()->SetSurface ( true );
+    _CoordinateSystem->getSettings ()->SetXSurface ( -10 );
+    _CoordinateSystem->getSettings ()->SetYSurface ( -10 );
+    _CoordinateSystem->getSettings ()->SetZSurface ( -10 );
 }
 
 GUIMyFrame1::~GUIMyFrame1 ()
@@ -258,7 +282,7 @@ void GUIMyFrame1::ZRotOnScroll ( wxScrollEvent& event )
 
 void GUIMyFrame1::AddSurfaceOnCheckBox ( wxCommandEvent& event )
 {
-    _CoordinateSystem->getSettings ()->setSurface ( AutoLen->IsChecked () );
+    _CoordinateSystem->getSettings ()->SetSurface ( AutoLen->IsChecked () );
     Repaint ();
 }
 
@@ -315,7 +339,7 @@ void GUIMyFrame1::ZSurfaceOnText ( wxCommandEvent& event )
 
 void GUIMyFrame1::SaveButtonOnButtonClick ( wxCommandEvent& event )
 {
-    wxFileDialog WxSaveFileDialog ( this, _ ( "Choose a file" ), _ ( "" ), _ ( "" ), _ ( "*.*" ), wxFD_SAVE | wxFD_OVERWRITE_PROMPT);
+    wxFileDialog WxSaveFileDialog(this, _("Choose a file"), _(""), _(""), _("*.*"), wxFD_SAVE | wxFD_OVERWRITE_PROMPT);
     WxSaveFileDialog.SetWildcard ( "JPEG files (*.jpg)|*.jpg|BMP files(*.bmp) | *.bmp |GIF files(*.gif) | *.gif|PNG files(*.png)|*.png " );
     if (WxSaveFileDialog.ShowModal() == wxID_OK)
     {
