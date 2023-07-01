@@ -33,9 +33,10 @@
 ///////////////////////////////////////////////////////////////////////////////
 /// Class MyFrame1
 ///////////////////////////////////////////////////////////////////////////////
-class MyFrame1 : public wxFrame
-{
-protected:
+class MyFrame1 : public wxFrame {
+	private:
+
+	protected:
 	wxStaticText* m_staticText1;
 	wxStaticText* m_staticText2;
 	wxChoice* XFun;
@@ -109,39 +110,41 @@ protected:
 	wxButton* SaveButton;
 
 	// Virtual event handlers, override them in your derived class
-	virtual void MainPanelOnSize(wxSizeEvent& event) { event.Skip(); }
-	virtual void MainPanelRepaint(wxUpdateUIEvent& event) { event.Skip(); }
-	virtual void XFunOnChoice(wxCommandEvent& event) { event.Skip(); }
-	virtual void AParamOnText(wxCommandEvent& event) { event.Skip(); }
-	virtual void YFunOnChoice(wxCommandEvent& event) { event.Skip(); }
-	virtual void BParamOnText(wxCommandEvent& event) { event.Skip(); }
-	virtual void ZFunOnChoice(wxCommandEvent& event) { event.Skip(); }
-	virtual void CParamOnText(wxCommandEvent& event) { event.Skip(); }
-	virtual void XScaleOnScroll(wxScrollEvent& event) { event.Skip(); }
-	virtual void YScaleOnScroll(wxScrollEvent& event) { event.Skip(); }
-	virtual void ZScaleOnScroll(wxScrollEvent& event) { event.Skip(); }
-	virtual void XMinOnText(wxCommandEvent& event) { event.Skip(); }
-	virtual void XMaxOnText(wxCommandEvent& event) { event.Skip(); }
-	virtual void YMinOnText(wxCommandEvent& event) { event.Skip(); }
-	virtual void YMaxOnText(wxCommandEvent& event) { event.Skip(); }
-	virtual void ZMinOnText(wxCommandEvent& event) { event.Skip(); }
-	virtual void ZMaxOnText(wxCommandEvent& event) { event.Skip(); }
-	virtual void ArrowBarOnScroll(wxScrollEvent& event) { event.Skip(); }
-	virtual void AutoLenOnCheckBox(wxCommandEvent& event) { event.Skip(); }
-	virtual void XRotOnScroll(wxScrollEvent& event) { event.Skip(); }
-	virtual void YRotOnScroll(wxScrollEvent& event) { event.Skip(); }
-	virtual void ZRotOnScroll(wxScrollEvent& event) { event.Skip(); }
-	virtual void AddSurfaceOnCheckBox(wxCommandEvent& event) { event.Skip(); }
-	virtual void XSurfaceOnText(wxCommandEvent& event) { event.Skip(); }
-	virtual void YSurfaceOnText(wxCommandEvent& event) { event.Skip(); }
-	virtual void ZSurfaceOnText(wxCommandEvent& event) { event.Skip(); }
-	virtual void SaveButtonOnButtonClick(wxCommandEvent& event) { event.Skip(); }
-
-public:
-	wxPanel* MainPanel;
+	virtual void MainPanelOnSize ( wxSizeEvent& event ) { event.Skip (); }
+	virtual void MainPanelRepaint ( wxUpdateUIEvent& event ) { event.Skip (); }
+	virtual void XFunOnChoice ( wxCommandEvent& event ) { event.Skip (); }
+	virtual void AParamOnText ( wxCommandEvent& event ) { event.Skip (); }
+	virtual void YFunOnChoice ( wxCommandEvent& event ) { event.Skip (); }
+	virtual void BParamOnText ( wxCommandEvent& event ) { event.Skip (); }
+	virtual void ZFunOnChoice ( wxCommandEvent& event ) { event.Skip (); }
+	virtual void CParamOnText ( wxCommandEvent& event ) { event.Skip (); }
+	virtual void XScaleOnScroll ( wxScrollEvent& event ) { event.Skip (); }
+	virtual void YScaleOnScroll ( wxScrollEvent& event ) { event.Skip (); }
+	virtual void ZScaleOnScroll ( wxScrollEvent& event ) { event.Skip (); }
+	virtual void XMinOnText ( wxCommandEvent& event ) { event.Skip (); }
+	virtual void XMaxOnText ( wxCommandEvent& event ) { event.Skip (); }
+	virtual void YMinOnText ( wxCommandEvent& event ) { event.Skip (); }
+	virtual void YMaxOnText ( wxCommandEvent& event ) { event.Skip (); }
+	virtual void ZMinOnText ( wxCommandEvent& event ) { event.Skip (); }
+	virtual void ZMaxOnText ( wxCommandEvent& event ) { event.Skip (); }
+	virtual void ArrowBarOnScroll ( wxScrollEvent& event ) { event.Skip (); }
+	virtual void AutoLenOnCheckBox ( wxCommandEvent& event ) { event.Skip (); }
+	virtual void XRotOnScroll ( wxScrollEvent& event ) { event.Skip (); }
+	virtual void YRotOnScroll ( wxScrollEvent& event ) { event.Skip (); }
+	virtual void ZRotOnScroll ( wxScrollEvent& event ) { event.Skip (); }
+	virtual void AddSurfaceOnCheckBox ( wxCommandEvent& event ) { event.Skip (); }
+	virtual void XSurfaceOnText ( wxCommandEvent& event ) { event.Skip (); }
+	virtual void YSurfaceOnText ( wxCommandEvent& event ) { event.Skip (); }
+	virtual void ZSurfaceOnText ( wxCommandEvent& event ) { event.Skip (); }
+	virtual void SaveButtonOnButtonClick ( wxCommandEvent& event ) { event.Skip (); }
 
 	MyFrame1(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Vector Field Visualisation"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(1280, 800), long style = wxDEFAULT_FRAME_STYLE | wxTAB_TRAVERSAL);
 
-	~MyFrame1();
+	public:
+	wxPanel* MainPanel;
+
+	MyFrame1 ( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT ( "Vector Field Visualisation" ), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize ( 1280, 800 ), long style = wxDEFAULT_FRAME_STYLE | wxTAB_TRAVERSAL );
+
+	~MyFrame1 ();
 
 };

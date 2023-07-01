@@ -3,14 +3,32 @@
 #include <cmath>
 #include "MatrixOperations.h"
 
+/**
+ * @brief Enum for function types
+ *
+ */
 enum funType {
 	A, AX, AX2, AX3, LOG_AX, EXP_AX, SIN_AX, COS_AX
 };
 
+/**
+ * @brief Class for settings of the coordinate system
+ * and the vector field with basic features
+ */
 class Settings {
 	public:
+	/**
+	 * @brief Construct a new Settings object
+	 *
+	 */
 	Settings ();
 
+	/**
+	 * @brief Setters and getters for function types
+	 * for x, y and z
+	 * @param fun
+	 * @return funType
+	 */
 	void SetXFun ( const funType& fun );
 	void SetYFun ( const funType& fun );
 	void SetZFun ( const funType& fun );
@@ -18,6 +36,12 @@ class Settings {
 	funType GetYFun () const;
 	funType GetZFun () const;
 
+	/**
+	 * @brief Setters and getters for function parameters
+	 * for x, y and z
+	 * @param a, b, c
+	 * @return double
+	 */
 	void SetA ( const double& a );
 	void SetB ( const double& b );
 	void SetC ( const double& c );
@@ -25,6 +49,12 @@ class Settings {
 	double GetB () const;
 	double GetC () const;
 
+	/**
+	 * @brief Setter and getter for range of axes
+	 * for x, y and z
+	 * @param x, y, z
+	 * @return double
+	 */
 	void SetXMin ( const double& x );
 	void SetXMax ( const double& x );
 	void SetYMin ( const double& y );
@@ -38,6 +68,13 @@ class Settings {
 	double GetZMin () const;
 	double GetZMax () const;
 
+	/**
+	 * @brief Setters and getters for scale of arrows
+	 * for x, y and z. Getters for scale matrix for arrows
+	 * and for scale matrix for coordinate system
+	 * @param x, y, z, autoScale, len, sx, sy, sz
+	 * @return int, bool, double, Matrix
+	 */
 	void SetXScale ( const int& x );
 	void SetYScale ( const int& y );
 	void SetZScale ( const int& z );
@@ -51,6 +88,12 @@ class Settings {
 	Matrix GetArrowScaleMatrix () const;
 	Matrix GetScaleMatrix ( const double& sx, const double& sy, const double& sz ) const;
 
+	/**
+	 * @brief Setters and getters for rotation
+	 * for x, y and z. Getters for rotation matrices
+	 * @param x, y, z
+	 * @return double, Matrix
+	 */
 	void SetXRot ( const double& x );
 	void SetYRot ( const double& y );
 	void SetZRot ( const double& z );
@@ -61,7 +104,13 @@ class Settings {
 	Matrix GetYRotMatrix () const;
 	Matrix GetZRotMatrix () const;
 
-
+	/**
+	 * @brief Setters and getters for additional surface
+	 * for x, y and z.
+	 *
+	 * @param additionalSurface, x, y, z
+	 * @return double
+	 */
 	void SetSurface ( const bool& additionalSurface );
 	bool IsAdditionalSurface () const;
 	void SetXSurface ( const double& x );
@@ -71,11 +120,23 @@ class Settings {
 	double GetYSurface () const;
 	double GetZSurface () const;
 
+	/**
+	 * @brief Calculate function value, it's maximum and norm.
+	 *
+	 * @param type, x, x, y, z
+	 * @return double
+	 */
 	double Calc ( const int& type, const double& x ) const;
 	double GetMax () const;
-	double GetMin () const;
 	double norm ( const double& x, const double& y, const double& z ) const;
 
+	/**
+	 * @brief Get translation matrix
+	 *
+	 *
+	 * @param x, y, z
+	 * @return Matrix
+	 */
 	Matrix GetTranslationMatrix ( const double& x, const double& y, const double& z ) const;
 
 	private:
