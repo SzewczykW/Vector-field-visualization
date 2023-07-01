@@ -92,6 +92,10 @@ void CoordinateSystem::drawVectorField(wxDC* dc, const double& width, const doub
     auto zMin = _Settings->GetZMin();
     auto zMax = _Settings->GetZMax();
 
+    auto xSurface = _Settings->GetXSurface();
+    auto ySurface = _Settings->GetYSurface();
+    auto zSurface = _Settings->GetZSurface();
+
     auto zFun = 2;
     auto yFun = 1;
     auto xFun = 0;
@@ -147,8 +151,14 @@ void CoordinateSystem::drawVectorField(wxDC* dc, const double& width, const doub
             {
                 x1 = xMin + i * xTick;
                 x2 = _Settings->Calc(xFun, x1);
-
-                drawArrow(dc, x1, y1, z1, x2, y2, z2, width, height);
+                if(_Settings->IsAdditionalSurface()==false) 
+                    drawArrow(dc, x1, y1, z1, x2, y2, z2, width, height);
+                else {
+                    auto Sign = xSurface * x1 + ySurface * y1 + zSurface * z1;
+                    auto Distance = Sign / (sqrt(pow(xSurface, 2) + pow(ySurface, 2) + pow(zSurface, 2)));
+                    if(Distance>0||Sign==0)
+                        drawArrow(dc, x1, y1, z1, x2, y2, z2, width, height);
+                }
             }
         }
     }
@@ -161,12 +171,15 @@ void CoordinateSystem::drawArrow(wxDC* dc, const double& x1, const double& y1, c
 
     // Draw arrow
     auto len = sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2) + pow(z2 - z1, 2));
-    auto scale = _Settings->GetScaleMatrix(1.0 / len, 1.0 / len, 1.0 / len);
 
 
     Vector4D v1(x1, y1, z1), v2(x2, y2, z2);
-    Vector4D v3(v1 + v2);
 
+    if (!_Settings->isAutoScaled()) {
+        v2 = v2 * ((len * (_Settings->GetArrowLength() +1.0)/ 10.0)/len);
+    }
+
+    Vector4D v3(v1 + v2);
     auto arrow = drawLine(dc, v1.getX(), v1.getY(), v1.getZ(), v3.getX(), v3.getY(), v3.getZ(), wxColor(0, 0, 0), width, height);
 
     auto dx = arrow.end.x - arrow.start.x;
@@ -176,8 +189,8 @@ void CoordinateSystem::drawArrow(wxDC* dc, const double& x1, const double& y1, c
 
 
 
-    dc->DrawLine(arrow.end.x, arrow.end.y, arrow.end.x - len * 0.9 * cos(arrowAngle + arrowSkew), arrow.end.y - len * 0.9 * sin(arrowAngle + arrowSkew));
-    dc->DrawLine(arrow.end.x, arrow.end.y, arrow.end.x - len * 0.9 * cos(arrowAngle - arrowSkew), arrow.end.y - len * 0.9 * sin(arrowAngle - arrowSkew));
+    dc->DrawLine(arrow.end.x, arrow.end.y, arrow.end.x - 8 * 0.9 * cos(arrowAngle + arrowSkew), arrow.end.y - 8 * 0.9 * sin(arrowAngle + arrowSkew));
+    dc->DrawLine(arrow.end.x, arrow.end.y, arrow.end.x - 8 * 0.9 * cos(arrowAngle - arrowSkew), arrow.end.y - 8 * 0.9 * sin(arrowAngle - arrowSkew));
 }
 
 Projection CoordinateSystem::project(const double& x, const double& y, const double& z,
