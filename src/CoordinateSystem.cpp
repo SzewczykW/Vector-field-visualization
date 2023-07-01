@@ -67,9 +67,11 @@ void CoordinateSystem::drawAxes ( wxDC* dc, const double& width, const double& h
     auto zMin = _Settings->GetZMin ();
     auto zMax = _Settings->GetZMax ();
 
+
     auto lineX = drawLine ( dc, xMin, 0, 0, xMax, 0, 0, wxColor ( 255, 0, 0 ), width, height );
 
     auto lineY = drawLine ( dc, 0, yMin, 0, 0, yMax, 0, wxColor ( 0, 255, 0 ), width, height );
+
 
     auto lineZ = drawLine ( dc, 0, 0, zMin, 0, 0, zMax, wxColor ( 0, 0, 255 ), width, height );
 }
@@ -180,18 +182,28 @@ void CoordinateSystem::drawArrow ( wxDC* dc, const double& x1, const double& y1,
     auto color = wxColor ( 0, 0, 0 );
 
     Vector4D v1 ( x1, y1, z1 ), v2 ( x2, y2, z2 );
-
+    Vector4D v3(v1 + v2);
     if ( _Settings->isAutoScaled () == false )
     {
         v2 = v2 * ( ( len * ( _Settings->GetArrowLength () + 1.0 ) / 10.0 ) / len );
+        v3 = v1 + v2;
     }
+
     else
     {
+
+        auto x3 = v3.getX();
+        auto y3 = v3.getY();
+        auto z3 = v3.getZ();
         // blue for function min, red for function max
+        auto len = sqrt(pow(x3 - x1, 2) + pow(y3 - y1, 2) + pow(z3 - z1, 2));
+        v3.setX(x1+(x3 - x1 )/ len);
+        v3.setY(y1+(y3 - y1 )/ len);
+        v3.setZ(z1+(z3 - z1 )/ len);
         color = wxColor ( 255 * _Settings->norm ( x1, y1, z1 ) / _Settings->GetMax (), 0, 255 * ( 1 - _Settings->norm ( x1, y1, z1 ) / _Settings->GetMax () ) );
     }
 
-    Vector4D v3 ( v1 + v2 );
+
     auto arrow = drawLine ( dc, v1.getX (), v1.getY (), v1.getZ (), v3.getX (), v3.getY (), v3.getZ (), color, width, height );
 
     auto dx = arrow.end.x - arrow.start.x;
