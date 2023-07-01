@@ -309,7 +309,7 @@ double Settings::Calc ( const int& type, const double& x ) const
 	}
 }
 
-double Settings::GetMax() const
+double Settings::GetMax () const
 {
 	double max = 0;
 
@@ -321,33 +321,39 @@ double Settings::GetMax() const
 	double yTick;
 	double zTick;
 
-	try {
-		xTick = (_xMax - _xMin) / xAxisScale;
+	try
+	{
+		xTick = ( _xMax - _xMin ) / xAxisScale;
 	}
-	catch (std::exception& e) {
+	catch ( std::exception& e )
+	{
 		xAxisScale = 5;
-		xTick = (_xMax - _xMin) / xAxisScale;
+		xTick = ( _xMax - _xMin ) / xAxisScale;
 	}
-	try {
-		yTick = (_yMax - _yMin) / yAxisScale;
+	try
+	{
+		yTick = ( _yMax - _yMin ) / yAxisScale;
 	}
-	catch (std::exception& e) {
+	catch ( std::exception& e )
+	{
 		yAxisScale = 5;
-		yTick = (_yMax - _yMin) / yAxisScale;
+		yTick = ( _yMax - _yMin ) / yAxisScale;
 	}
-	try {
-		zTick = (_zMax - _zMin) / zAxisScale;
+	try
+	{
+		zTick = ( _zMax - _zMin ) / zAxisScale;
 	}
-	catch (std::exception& e) {
+	catch ( std::exception& e )
+	{
 		zAxisScale = 3;
-		zTick = (_zMax - _zMin) / zAxisScale;
+		zTick = ( _zMax - _zMin ) / zAxisScale;
 	}
 
-	for (double i = _xMin; i <= _xMax; i += xTick)
+	for ( double i = _xMin; i <= _xMax; i += xTick )
 	{
-		for (double j = _yMin; j <= _yMax; j += yTick)
+		for ( double j = _yMin; j <= _yMax; j += yTick )
 		{
-			for (double k = _zMin; k <= _zMax; k += zTick)
+			for ( double k = _zMin; k <= _zMax; k += zTick )
 			{
 				double tmp = norm ( i, j, k );
 				if ( tmp > max )
@@ -358,58 +364,9 @@ double Settings::GetMax() const
 	return max;
 }
 
-double Settings::GetMin() const
+double Settings::norm ( const double& x, const double& y, const double& z ) const
 {
-	double min = 0;
-
-	auto xAxisScale = _xScale;
-	auto yAxisScale = _yScale;
-	auto zAxisScale = _zScale;
-
-	double xTick;
-	double yTick;
-	double zTick;
-
-	try {
-		xTick = (_xMax - _xMin) / xAxisScale;
-	}
-	catch (std::exception& e) {
-		xAxisScale = 5;
-		xTick = (_xMax - _xMin) / xAxisScale;
-	}
-	try {
-		yTick = (_yMax - _yMin) / yAxisScale;
-	}
-	catch (std::exception& e) {
-		yAxisScale = 5;
-		yTick = (_yMax - _yMin) / yAxisScale;
-	}
-	try {
-		zTick = (_zMax - _zMin) / zAxisScale;
-	}
-	catch (std::exception& e) {
-		zAxisScale = 3;
-		zTick = (_zMax - _zMin) / zAxisScale;
-	}
-
-	for (double i = _xMin; i <= _xMax; i += xTick)
-	{
-		for (double j = _yMin; j <= _yMax; j += yTick)
-		{
-			for (double k = _zMin; k <= _zMax; k += zTick)
-			{
-				double tmp = norm ( i, j, k );
-				if ( tmp < min )
-					min = tmp;
-			}
-		}
-	}
-	return min;
-}
-
-double Settings::norm(const double& x, const double& y, const double& z) const
-{
-	return sqrt(pow(Calc(0, x),2) + pow(Calc(1, y),2) + pow(Calc(2, z),2));
+	return sqrt ( pow ( Calc ( 0, x ), 2 ) + pow ( Calc ( 1, y ), 2 ) + pow ( Calc ( 2, z ), 2 ) );
 }
 
 Matrix Settings::GetTranslationMatrix ( const double& x, const double& y, const double& z ) const
