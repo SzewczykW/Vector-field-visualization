@@ -29,7 +29,6 @@ CoordinateSystem::~CoordinateSystem()
 {
     delete _Settings;
 }
-
 void CoordinateSystem::setSettings(Settings* settings)
 {
     _Settings = settings;
@@ -193,7 +192,7 @@ Projection CoordinateSystem::project(const double& x, const double& y, const dou
     //matrix to translate our coordinate system to center of screen
 
     auto translation = _Settings->GetTranslationMatrix(256 * width, -height * 192, 0.0);
-
+  
     //rotation matrices
     auto rotationX = _Settings->GetXRotMatrix();
     auto rotationY = _Settings->GetYRotMatrix();

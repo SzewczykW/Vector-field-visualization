@@ -231,7 +231,6 @@ Matrix Settings::GetZRotMatrix () const
 	return zRot;
 }
 
-
 void Settings::SetSurface ( const bool& additionalSurface )
 {
 	_additionalSurface = additionalSurface;

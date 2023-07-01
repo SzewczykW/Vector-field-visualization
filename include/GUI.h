@@ -35,8 +35,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 class MyFrame1 : public wxFrame
 {
-private:
-
 protected:
 	wxStaticText* m_staticText1;
 	wxStaticText* m_staticText2;
@@ -138,7 +136,6 @@ protected:
 	virtual void YSurfaceOnText(wxCommandEvent& event) { event.Skip(); }
 	virtual void ZSurfaceOnText(wxCommandEvent& event) { event.Skip(); }
 	virtual void SaveButtonOnButtonClick(wxCommandEvent& event) { event.Skip(); }
-
 
 public:
 	wxPanel* MainPanel;
