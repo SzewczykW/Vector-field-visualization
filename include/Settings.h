@@ -62,8 +62,8 @@ class Settings {
 	Matrix GetZRotMatrix () const;
 
 
-	void setSurface ( const bool& additionalSurface );
-	bool isAdditionalSurface () const;
+	void SetSurface ( const bool& additionalSurface );
+	bool IsAdditionalSurface () const;
 	void SetXSurface ( const double& x );
 	void SetYSurface ( const double& y );
 	void SetZSurface ( const double& z );
@@ -71,8 +71,10 @@ class Settings {
 	double GetYSurface () const;
 	double GetZSurface () const;
 
-	double Calc ( const int type, const double x ) const;
-
+	double Calc ( const int& type, const double& x ) const;
+	double GetMax () const;
+	double GetMin () const;
+	double norm ( const double& x, const double& y, const double& z ) const;
 
 	Matrix GetTranslationMatrix ( const double& x, const double& y, const double& z ) const;
 
@@ -119,7 +121,7 @@ class Settings {
 	 */
 	bool _additionalSurface;
 	/**
-	 * @brief Additional urface coordinates
+	 * @brief Additional surface coordinates
 	 *
 	 */
 	double _xSurface, _ySurface, _zSurface;
