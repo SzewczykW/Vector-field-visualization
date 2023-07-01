@@ -37,9 +37,5 @@ class CoordinateSystem {
                     const double& x2, const double& y2, const double& z2, const wxColor& color, const double& width, const double& height ) const;
     Projection project ( const double& x, const double& y, const double& z, const double& width, const double& heigh ) const;
     private:
-    /**
-     * @brief Settings of the coordinate system.
-     *
-     */
     Settings* _Settings;
 };
