@@ -180,6 +180,7 @@ Projection CoordinateSystem::project ( const double& x, const double& y, const d
     // OLD:
     //auto translation = _Settings->GetTranslationMatrix(width/16.0, height/16.0, 0.0);
 
+
     //rotation matrices
     auto rotationX = _Settings->GetXRotMatrix ();
     auto rotationY = _Settings->GetYRotMatrix ();
@@ -189,7 +190,8 @@ Projection CoordinateSystem::project ( const double& x, const double& y, const d
     // OLD:
     //auto scale = _Settings->GetScaleMatrix(width/16.0, height/16.0, width/16.0);
 
-    auto scale = _Settings->GetScaleMatrix(width * 20.0, height * 20.0, width * 20);
+    auto scale = _Settings->GetScaleMatrix(width * 20.0, height * 20.0, width * 20.0);
+
 
     //transformation matrix
     auto transform = translation * rotationX * rotationY * rotationZ * scale;
@@ -227,6 +229,7 @@ Projection CoordinateSystem::project ( const double& x, const double& y, const d
     //projectionMatrix.set ( 3, 2, -1.0 );
 
     auto transformedPos = projectionMatrix * transform * input;
+
     projection.x = transformedPos.getX ();
     projection.y = transformedPos.getY ();
     return projection;
@@ -243,7 +246,7 @@ Line CoordinateSystem::drawLine ( wxDC* dc, const double& x1, const double& y1, 
     auto p1 = project ( v1.getX (), v1.getY (), v1.getZ (), width, height );
     auto p2 = project ( v2.getX (), v2.getY (), v2.getZ (), width, height );
     auto line = Line ( p1, p2 );
- 
+
     dc->DrawLine ( p1.x, p1.y, p2.x, p2.y );
     return line;
 }

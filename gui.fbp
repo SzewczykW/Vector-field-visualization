@@ -29,6 +29,7 @@
         <property name="use_array_enum">0</property>
         <property name="use_enum">0</property>
         <property name="use_microsoft_bom">0</property>
+
         <object class="Frame" expanded="1">
             <property name="aui_managed">0</property>
             <property name="aui_manager_style">wxAUI_MGR_DEFAULT</property>
@@ -44,6 +45,7 @@
             <property name="hidden">0</property>
             <property name="id">wxID_ANY</property>
             <property name="maximum_size">1280,800</property>
+
             <property name="minimum_size">1280,800</property>
             <property name="name">MyFrame1</property>
             <property name="pos"></property>
@@ -174,6 +176,7 @@
                                 <property name="hidden">0</property>
                                 <property name="id">wxID_ANY</property>
                                 <property name="label">V(x,y,z) = Pi+Qj+Rk</property>
+
                                 <property name="markup">0</property>
                                 <property name="max_size"></property>
                                 <property name="maximize_button">0</property>
@@ -991,6 +994,7 @@
                                 </object>
                             </object>
                         </object>
+
                         <object class="sizeritem" expanded="1">
                             <property name="border">5</property>
                             <property name="flag">wxALIGN_CENTER_HORIZONTAL|wxALL</property>
@@ -1052,6 +1056,7 @@
                                 <property name="wrap">-1</property>
                             </object>
                         </object>
+
                         <object class="sizeritem" expanded="0">
                             <property name="border">5</property>
                             <property name="flag">wxALIGN_CENTER_HORIZONTAL|wxALL</property>
@@ -1085,6 +1090,7 @@
                                 <property name="hidden">0</property>
                                 <property name="id">wxID_ANY</property>
                                 <property name="label">Number Of Nodes:</property>
+
                                 <property name="markup">0</property>
                                 <property name="max_size"></property>
                                 <property name="maximize_button">0</property>
@@ -1215,7 +1221,9 @@
                                         <property name="gripper">0</property>
                                         <property name="hidden">0</property>
                                         <property name="id">wxID_ANY</property>
+
                                         <property name="label">1</property>
+
                                         <property name="markup">0</property>
                                         <property name="max_size"></property>
                                         <property name="maximize_button">0</property>
@@ -1343,7 +1351,9 @@
                                         <property name="gripper">0</property>
                                         <property name="hidden">0</property>
                                         <property name="id">wxID_ANY</property>
+
                                         <property name="label">25</property>
+
                                         <property name="markup">0</property>
                                         <property name="max_size"></property>
                                         <property name="maximize_button">0</property>
@@ -1538,6 +1548,7 @@
                                         <property name="hidden">0</property>
                                         <property name="id">wxID_ANY</property>
                                         <property name="label">1</property>
+
                                         <property name="markup">0</property>
                                         <property name="max_size"></property>
                                         <property name="maximize_button">0</property>
@@ -1665,7 +1676,9 @@
                                         <property name="gripper">0</property>
                                         <property name="hidden">0</property>
                                         <property name="id">wxID_ANY</property>
+
                                         <property name="label">25</property>
+
                                         <property name="markup">0</property>
                                         <property name="max_size"></property>
                                         <property name="maximize_button">0</property>
@@ -1859,7 +1872,9 @@
                                         <property name="gripper">0</property>
                                         <property name="hidden">0</property>
                                         <property name="id">wxID_ANY</property>
+ 
                                         <property name="label">1</property>
+
                                         <property name="markup">0</property>
                                         <property name="max_size"></property>
                                         <property name="maximize_button">0</property>
@@ -1988,6 +2003,7 @@
                                         <property name="hidden">0</property>
                                         <property name="id">wxID_ANY</property>
                                         <property name="label">25</property>
+
                                         <property name="markup">0</property>
                                         <property name="max_size"></property>
                                         <property name="maximize_button">0</property>
@@ -2111,7 +2127,9 @@
                                 <property name="gripper">0</property>
                                 <property name="hidden">0</property>
                                 <property name="id">wxID_ANY</property>
+
                                 <property name="label">Limits(x,y,z): &lt;-5,5&gt;</property>
+
                                 <property name="markup">0</property>
                                 <property name="max_size"></property>
                                 <property name="maximize_button">0</property>

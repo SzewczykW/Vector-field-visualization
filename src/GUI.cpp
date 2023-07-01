@@ -11,7 +11,9 @@
 
 MyFrame1::MyFrame1( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxFrame( parent, id, title, pos, size, style )
 {
+
 	this->SetSizeHints( wxSize( 1280,800 ), wxSize( 1280,800 ) );
+
 
 	wxBoxSizer* bSizer1;
 	bSizer1 = new wxBoxSizer( wxHORIZONTAL );
@@ -30,7 +32,9 @@ MyFrame1::MyFrame1( wxWindow* parent, wxWindowID id, const wxString& title, cons
 	wxBoxSizer* bSizer3;
 	bSizer3 = new wxBoxSizer( wxVERTICAL );
 
+
 	m_staticText1 = new wxStaticText( this, wxID_ANY, wxT("V(x,y,z) = Pi+Qj+Rk"), wxDefaultPosition, wxDefaultSize, 0 );
+
 	m_staticText1->Wrap( -1 );
 	bSizer3->Add( m_staticText1, 0, wxALIGN_CENTER_HORIZONTAL|wxALL, 5 );
 
