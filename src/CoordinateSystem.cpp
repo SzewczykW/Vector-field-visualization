@@ -67,9 +67,11 @@ void CoordinateSystem::drawAxes ( wxDC* dc, const double& width, const double& h
     auto zMin = _Settings->GetZMin ();
     auto zMax = _Settings->GetZMax ();
 
+
     auto lineX = drawLine ( dc, xMin, 0, 0, xMax, 0, 0, wxColor ( 255, 0, 0 ), width, height );
 
     auto lineY = drawLine ( dc, 0, yMin, 0, 0, yMax, 0, wxColor ( 0, 255, 0 ), width, height );
+
 
     auto lineZ = drawLine ( dc, 0, 0, zMin, 0, 0, zMax, wxColor ( 0, 0, 255 ), width, height );
 }
